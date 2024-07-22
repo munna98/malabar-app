@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0F444B',
+      main: '#143326',
     },
     secondary: {
       main: '#ECC290',
@@ -35,7 +35,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#ECC290',
-          color: '#0F444B',
+          color: '#143326',
           '&:hover': {
             backgroundColor: '#d4a16e', // A slightly darker shade for hover effect
           },

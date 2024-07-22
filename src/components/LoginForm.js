@@ -13,23 +13,23 @@ import { useRouter } from 'next/router';
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#0F444B",
+    color: "#143326",
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#0F444B",
+    borderBottomColor: "#143326",
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#0F444B",
+      borderColor: "#143326",
     },
     "&:hover fieldset": {
-      borderColor: "#0F444B",
+      borderColor: "#143326",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#0F444B",
+      borderColor: "#143326",
     },
     "& input": {
-      color: "#0F444B",
+      color: "#143326",
     },
   },
 });
@@ -75,7 +75,7 @@ const LoginForm = () => {
           justifyContent="center"
           padding="32px"
           sx={{
-            bgcolor: "#0F444B",
+            bgcolor: "#143326",
             width: isSmallScreen ? "100%" : "50%",
             textAlign: "center",
             height: "100%",
@@ -117,7 +117,7 @@ const LoginForm = () => {
               variant="h4"
               gutterBottom
               style={{
-                color: "#0F444B",
+                color: "#143326",
                 fontFamily: "Cinzel Decorative, serif",
               }}
             >
@@ -146,7 +146,7 @@ const LoginForm = () => {
               onClick={handleLogin}
               style={{
                 marginTop: "16px",
-                backgroundColor: "#0F444B",
+                backgroundColor: "#143326",
                 color: "#ECC290",
               }}
             >
