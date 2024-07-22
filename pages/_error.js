@@ -32,7 +32,7 @@ const ErrorPage = ({ statusCode }) => {
         Oops! Something went wrong...
       </Typography>
       <Typography variant="h6" component="p" style={{ marginTop: '16px', color: '#143326' }}>
-        We're pretty sure it's not your fault, but we're still blaming you😜.
+        We&apos;re pretty sure it&apos;s not your fault, but we&apos;re still blaming you😜.
       </Typography>
       <Button
         variant="contained"
