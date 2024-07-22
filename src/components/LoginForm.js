@@ -1,3 +1,4 @@
+// src/components/LoginForm.js
 import React, { useState } from "react";
 import {
   Button,
@@ -45,8 +46,12 @@ const LoginForm = () => {
     console.log("User ID:", userId);
     console.log("Password:", password);
 
-        // Navigate to dynamic profile page
-        router.push(`/profile/${userId}`);
+    // Navigate to dynamic profile page
+    router.push(`/profile/${userId}`);
+  };
+
+  const handleRegister = () => {
+    router.push('/register'); // Assuming you have a register page at /register
   };
 
   return (
@@ -90,7 +95,7 @@ const LoginForm = () => {
             gutterBottom
             style={{ color: "#ECC290", fontFamily: "Cinzel Decorative, serif" }}
           >
-            Welcome to the most trusted exclusive muslim matrimony in Kerala
+            Welcome to the most trusted exclusive Muslim matrimony in Kerala
           </Typography>
         </Box>
         <Box
@@ -111,7 +116,7 @@ const LoginForm = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width={isSmallScreen ? "90%" : "400px"} // Adjust width here
+            width={isSmallScreen ? "100%" : "400px"} // Adjust width here
           >
             <Typography
               variant="h4"
@@ -152,6 +157,18 @@ const LoginForm = () => {
             >
               Login
             </Button>
+            <Typography
+              variant="body2"
+              style={{
+                marginTop: "16px",
+                color: "#143326",
+                cursor: "pointer",
+                textDecoration: "underline"
+              }}
+              onClick={handleRegister}
+            >
+              Not registered? Click here to register
+            </Typography>
           </Box>
         </Box>
       </Box>
