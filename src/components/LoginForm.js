@@ -6,34 +6,10 @@ import {
   Container,
   Typography,
   Box,
-  styled,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useRouter } from 'next/router';
-
-const StyledTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: "#143326",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "#143326",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#143326",
-    },
-    "&:hover fieldset": {
-      borderColor: "#143326",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#143326",
-    },
-    "& input": {
-      color: "#143326",
-    },
-  },
-});
 
 const LoginForm = () => {
   const [userId, setUserId] = useState("");
@@ -69,7 +45,7 @@ const LoginForm = () => {
     >
       <Box
         display="flex"
-        flexDirection={isSmallScreen ? "column" : "row"}
+        flexDirection={isSmallScreen ? 'column' : 'row'}
         width="100%"
         height="100%"
       >
@@ -80,22 +56,34 @@ const LoginForm = () => {
           justifyContent="center"
           padding="32px"
           sx={{
-            bgcolor: "#143326",
-            width: isSmallScreen ? "100%" : "50%",
-            textAlign: "center",
-            height: "100%",
+            bgcolor: '#143326',
+            width: isSmallScreen ? '100%' : '50%',
+            textAlign: 'center',
+            height: '100%',
+            position: 'relative'
           }}
         >
           <Box mt={4}>
-            <img src="/logo.png" alt="Logo" style={{ maxWidth: "150px"}} />{" "}
-            {/* Replace with your logo */}
+            <img src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} /> {/* Replace with your logo */}
           </Box>
           <Typography
             variant="h6"
             gutterBottom
-            style={{ color: "#ECC290", fontFamily: "Cinzel Decorative, serif" }}
+            style={{ color: '#ECC290', fontSize: isSmallScreen ? '1rem' : '1.25rem' }}
           >
             Welcome to the most trusted exclusive Muslim matrimony in Kerala
+          </Typography>
+          <Typography
+            variant="h3"
+            gutterBottom
+            style={{ 
+              color: '#ECC290', 
+              fontSize: isSmallScreen ? '1.5rem' : '2rem',
+              position: 'absolute', 
+              bottom: '32px' 
+            }}
+          >
+            Manavatty from Malabar
           </Typography>
         </Box>
         <Box
@@ -105,10 +93,10 @@ const LoginForm = () => {
           justifyContent="center"
           padding="32px"
           sx={{
-            bgcolor: "#ECC290",
-            width: isSmallScreen ? "100%" : "50%",
-            textAlign: "center",
-            height: "100%",
+            bgcolor: '#ECC290',
+            width: isSmallScreen ? '100%' : '50%',
+            textAlign: 'center',
+            height: '100%',
           }}
         >
           <Box
@@ -116,19 +104,19 @@ const LoginForm = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width={isSmallScreen ? "100%" : "400px"} // Adjust width here
+            width={isSmallScreen ? '100%' : '500px'}
           >
             <Typography
               variant="h4"
               gutterBottom
-              style={{
-                color: "#143326",
-                fontFamily: "Cinzel Decorative, serif",
+              style={{ 
+                color: '#143326', 
+                fontSize: isSmallScreen ? '1.25rem' : '1.75rem' 
               }}
             >
               Login
             </Typography>
-            <StyledTextField
+            <TextField
               label="User ID"
               variant="outlined"
               margin="normal"
@@ -136,7 +124,7 @@ const LoginForm = () => {
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
             />
-            <StyledTextField
+            <TextField
               label="Password"
               type="password"
               variant="outlined"
@@ -149,25 +137,22 @@ const LoginForm = () => {
               variant="contained"
               fullWidth
               onClick={handleLogin}
-              style={{
-                marginTop: "16px",
-                backgroundColor: "#143326",
-                color: "#ECC290",
-              }}
+              style={{ marginTop: '16px' }}
             >
               Login
             </Button>
             <Typography
               variant="body2"
               style={{
-                marginTop: "16px",
-                color: "#143326",
-                cursor: "pointer",
-                textDecoration: "underline"
+                marginTop: '16px',
+                color: '#143326',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: isSmallScreen ? '0.75rem' : '1rem'
               }}
               onClick={handleRegister}
             >
-              Not registered? Click here to register
+              Not registered yet? Register here
             </Typography>
           </Box>
         </Box>

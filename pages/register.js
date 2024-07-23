@@ -12,29 +12,6 @@ import {
 import { useRouter } from 'next/router';
 import NavBar from '../src/components/NavBar';
 
-const StyledTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: "#143326",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "#143326",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#143326",
-    },
-    "&:hover fieldset": {
-      borderColor: "#143326",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#143326",
-    },
-    "& input": {
-      color: "#143326",
-    },
-  },
-});
-
 const Register = () => {
   const [userid, setUserId] = useState('');
   const [email, setEmail] = useState('');
@@ -94,7 +71,7 @@ const Register = () => {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
-              width={isSmallScreen ? '90%' : '400px'}
+              width={isSmallScreen ? '100%' : '500px'}
             >
               <Typography
                 variant="h4"
@@ -106,7 +83,7 @@ const Register = () => {
               >
                 Register
               </Typography>
-              <StyledTextField
+              <TextField
                 label="UserId"
                 variant="outlined"
                 margin="normal"
@@ -114,7 +91,7 @@ const Register = () => {
                 value={userid}
                 onChange={(e) => setUserId(e.target.value)}
               />
-              {/* <StyledTextField
+              {/* <TextField
                 label="Email"
                 type="email"
                 variant="outlined"
@@ -123,7 +100,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <StyledTextField
+              <TextField
                 label="Password"
                 type="password"
                 variant="outlined"
