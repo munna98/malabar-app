@@ -1,8 +1,25 @@
-import React from 'react';
-import { Box, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel } from '@mui/material';
+import React from "react";
+import {
+  Box,
+  TextField,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 
 const MoreInfoStep = ({ formValues, handleChange }) => (
-  <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
+  <Box
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+    justifyContent="center"
+    width="100%"
+  >
     <FormControl fullWidth variant="outlined" margin="normal">
       <InputLabel>Spirit</InputLabel>
       <Select
@@ -13,13 +30,23 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       >
         <MenuItem value="Sunni">Sunni</MenuItem>
         <MenuItem value="Salafi">Salafi</MenuItem>
-        <MenuItem value="Tabligh">Tabligh</MenuItem>
-        <MenuItem value="Jama'at">Jama'at</MenuItem>
+        <MenuItem value="Tablig">Tablig</MenuItem>
+        <MenuItem value="Jama&rsquo;t">Jama&rsquo;t</MenuItem>
       </Select>
     </FormControl>
-    <FormControl component="fieldset" fullWidth margin="normal" style={{ textAlign: 'left' }}>
+    <FormControl
+      component="fieldset"
+      fullWidth
+      margin="normal"
+      style={{ textAlign: "left" }}
+    >
       <FormLabel component="legend">First Marriage?</FormLabel>
-      <RadioGroup name="firstMarriage" value={formValues.firstMarriage} onChange={handleChange} row>
+      <RadioGroup
+        name="firstMarriage"
+        value={formValues.firstMarriage}
+        onChange={handleChange}
+        row
+      >
         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
         <FormControlLabel value="no" control={<Radio />} label="No" />
       </RadioGroup>
@@ -33,7 +60,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       type="number"
       value={formValues.age}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Education"
@@ -43,7 +70,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="education"
       value={formValues.education}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Madrasa Education"
@@ -53,7 +80,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="madrasaEducation"
       value={formValues.madrasaEducation}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Job"
@@ -63,7 +90,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="job"
       value={formValues.job}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Skin Color"
@@ -73,7 +100,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="skinColor"
       value={formValues.skinColor}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Height"
@@ -84,7 +111,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       type="number"
       value={formValues.height}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <FormControl fullWidth variant="outlined" margin="normal">
       <InputLabel>Body Type</InputLabel>
@@ -108,7 +135,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="district"
       value={formValues.district}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
     <TextField
       label="Place"
@@ -118,7 +145,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => (
       name="place"
       value={formValues.place}
       onChange={handleChange}
-      inputProps={{ style: { textAlign: 'left' } }}
+      inputProps={{ style: { textAlign: "left" } }}
     />
   </Box>
 );
