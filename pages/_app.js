@@ -3,10 +3,10 @@ import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../src/theme';
-import '../styles/globals.css'
+import '../styles/globals.css';
+import 'react-phone-input-2/lib/style.css'; // Add this import statement
 import { UserProvider } from '../src/context/UserContext';
 import Head from 'next/head';
-
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;

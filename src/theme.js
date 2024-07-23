@@ -19,53 +19,56 @@ const theme = createTheme({
     },
     h3: {
       fontFamily: 'Cinzel Decorative, serif',
-      fontSize: '2rem', // Adjust font size as needed
-      fontWeight: 700, // Bold weight to make it stand out
-      color: '#E56290', // Set the color to match the design
-      letterSpacing: '0.05em', // Slight spacing to enhance readability
-      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', // Adds a subtle shadow for depth
+      fontSize: '2rem',
+      fontWeight: 700,
+      color: '#E56290',
+      letterSpacing: '0.05em',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     },
     h4: {
       fontFamily: 'Cinzel Decorative, serif',
-      fontSize: '1.75rem', // Slightly smaller than h3
-      fontWeight: 700, // Bold weight
-      color: '#143326', // Primary color to differentiate from h3
-      letterSpacing: '0.05em', // Slight spacing
-      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)', // Subtle shadow for depth
+      fontSize: '1.75rem',
+      fontWeight: 700,
+      color: '#143326',
+      letterSpacing: '0.05em',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
     },
     h5: {
       fontFamily: 'Cinzel Decorative, serif',
     },
     h6: {
       fontFamily: 'Cinzel Decorative, serif',
-      fontSize: '10px', // Adjust font size as needed
-      fontWeight: 500, // Bold weight to make it stand out
-      color: '#ECC290', // Set the color to match the design
-      letterSpacing: '0.25em', // Slight spacing to enhance readability
-      
-      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', // Adds a subtle shadow for depth
+      fontSize: '10px',
+      fontWeight: 500,
+      color: '#ECC290',
+      letterSpacing: '0.25em',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     },
   },
   components: {
     MuiButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#143326',
-          color: '#ECC290',
-          borderRadius: '8px',
-          padding: '12px 24px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          transition: 'background-color 0.3s, transform 0.3s',
-          '&:hover': {
-            backgroundColor: '#0f2b22',
-            transform: 'scale(1.01)',
-          },
-          '&:active': {
-            backgroundColor: '#0d261d',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+      variants: [
+        {
+          props: { variant: 'back' },
+          style: {
+            backgroundColor: '#f5f5f5',
+            color: '#143326',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            padding: '12px 24px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            transition: 'background-color 0.3s, transform 0.3s',
+            '&:hover': {
+              backgroundColor: '#e0e0e0',
+              transform: 'scale(1.01)',
+            },
+            '&:active': {
+              backgroundColor: '#c0c0c0',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            },
           },
         },
-      },
+      ],
     },
     MuiTextField: {
       styleOverrides: {
