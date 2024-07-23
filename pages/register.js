@@ -21,6 +21,8 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import NavBar from '../src/components/NavBar';
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
 
 const Register = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -64,6 +66,10 @@ const Register = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const handlePhoneChange = (value) => {
+    setFormValues({ ...formValues, mobile: value });
+  };
+
   const handleRegister = () => {
     console.log(formValues);
 
@@ -79,32 +85,7 @@ const Register = () => {
     switch (step) {
       case 0:
         return (
-          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Bride or Groom</FormLabel>
-              <RadioGroup name="role" value={formValues.role} onChange={handleChange} row>
-                <FormControlLabel value="bride" control={<Radio />} label="Bride" />
-                <FormControlLabel value="groom" control={<Radio />} label="Groom" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              label="Country"
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="country"
-              value={formValues.country}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Mobile"
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="mobile"
-              value={formValues.mobile}
-              onChange={handleChange}
-            />
+          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
             <TextField
               label="Name"
               variant="outlined"
@@ -113,12 +94,27 @@ const Register = () => {
               name="name"
               value={formValues.name}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
+            />
+            <FormControl component="fieldset" fullWidth margin="normal" style={{ textAlign: 'left' }}>
+              <FormLabel component="legend">Bride or Groom</FormLabel>
+              <RadioGroup name="role" value={formValues.role} onChange={handleChange} row>
+                <FormControlLabel value="bride" control={<Radio />} label="Bride" />
+                <FormControlLabel value="groom" control={<Radio />} label="Groom" />
+              </RadioGroup>
+            </FormControl>
+            <PhoneInput
+              country={'us'}
+              value={formValues.mobile}
+              onChange={handlePhoneChange}
+              inputStyle={{ width: '100%', textAlign: 'left' }}
+              containerStyle={{ width: '100%' }}
             />
           </Box>
         );
       case 1:
         return (
-          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
             <TextField
               label="Spirit"
               variant="outlined"
@@ -127,8 +123,9 @@ const Register = () => {
               name="spirit"
               value={formValues.spirit}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" fullWidth margin="normal" style={{ textAlign: 'left' }}>
               <FormLabel component="legend">First Marriage?</FormLabel>
               <RadioGroup name="firstMarriage" value={formValues.firstMarriage} onChange={handleChange} row>
                 <FormControlLabel value="yes" control={<Radio />} label="Yes" />
@@ -141,8 +138,10 @@ const Register = () => {
               margin="normal"
               fullWidth
               name="age"
+              type="number"
               value={formValues.age}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Education"
@@ -152,6 +151,7 @@ const Register = () => {
               name="education"
               value={formValues.education}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Madrasa Education"
@@ -161,6 +161,7 @@ const Register = () => {
               name="madrasaEducation"
               value={formValues.madrasaEducation}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Job"
@@ -170,6 +171,7 @@ const Register = () => {
               name="job"
               value={formValues.job}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Skin Color"
@@ -179,6 +181,7 @@ const Register = () => {
               name="skinColor"
               value={formValues.skinColor}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Height"
@@ -186,8 +189,10 @@ const Register = () => {
               margin="normal"
               fullWidth
               name="height"
+              type="number"
               value={formValues.height}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel>Body Type</InputLabel>
@@ -211,6 +216,7 @@ const Register = () => {
               name="district"
               value={formValues.district}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Place"
@@ -220,12 +226,13 @@ const Register = () => {
               name="place"
               value={formValues.place}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
           </Box>
         );
       case 2:
         return (
-          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
             <TextField
               label="Partner's District"
               variant="outlined"
@@ -234,6 +241,7 @@ const Register = () => {
               name="partnerDistrict"
               value={formValues.partnerDistrict}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Partner's Age From"
@@ -241,8 +249,10 @@ const Register = () => {
               margin="normal"
               fullWidth
               name="partnerAgeFrom"
+              type="number"
               value={formValues.partnerAgeFrom}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Partner's Age To"
@@ -250,8 +260,10 @@ const Register = () => {
               margin="normal"
               fullWidth
               name="partnerAgeTo"
+              type="number"
               value={formValues.partnerAgeTo}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Additional Info 1"
@@ -261,6 +273,7 @@ const Register = () => {
               name="additionalInfo1"
               value={formValues.additionalInfo1}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Additional Info 2"
@@ -270,6 +283,7 @@ const Register = () => {
               name="additionalInfo2"
               value={formValues.additionalInfo2}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
             <TextField
               label="Additional Info 3"
@@ -279,6 +293,7 @@ const Register = () => {
               name="additionalInfo3"
               value={formValues.additionalInfo3}
               onChange={handleChange}
+              inputProps={{ style: { textAlign: 'left' } }}
             />
           </Box>
         );
@@ -305,11 +320,10 @@ const Register = () => {
       >
         <Box
           display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
+          flexDirection={isSmallScreen ? 'column' : 'row'}
           width="100%"
           height="100%"
+          overflow="auto" // Add scroll if necessary
         >
           <Box
             display="flex"
@@ -319,7 +333,7 @@ const Register = () => {
             padding="32px"
             sx={{
               bgcolor: "#ECC290",
-              width: isSmallScreen ? '100%' : '50%',
+              width: isSmallScreen ? '100%' : '500px',
               textAlign: 'center',
               height: '100%',
             }}
@@ -329,7 +343,7 @@ const Register = () => {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
-              width={isSmallScreen ? '100%' : '500px'}
+              width="100%"
             >
               <Typography
                 variant="h4"
@@ -349,7 +363,18 @@ const Register = () => {
                 ))}
               </Stepper>
               {getStepContent(activeStep)}
-              <Box mt={2}>
+              <Box mt={2} display="flex" justifyContent="flex-end" width="100%">
+                {activeStep > 0 && (
+                  <Button
+                    onClick={handleBack}
+                    style={{
+                      marginRight: '8px',
+                      color: "#143326",
+                    }}
+                  >
+                    Back
+                  </Button>
+                )}
                 {activeStep === steps.length - 1 ? (
                   <Button
                     variant="contained"
@@ -371,17 +396,6 @@ const Register = () => {
                     }}
                   >
                     Next
-                  </Button>
-                )}
-                {activeStep > 0 && (
-                  <Button
-                    onClick={handleBack}
-                    style={{
-                      marginLeft: '8px',
-                      color: "#143326",
-                    }}
-                  >
-                    Back
                   </Button>
                 )}
               </Box>
