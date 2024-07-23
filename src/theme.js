@@ -42,7 +42,8 @@ const theme = createTheme({
       fontWeight: 500, // Bold weight to make it stand out
       color: '#ECC290', // Set the color to match the design
       letterSpacing: '0.25em', // Slight spacing to enhance readability
-      // textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', // Adds a subtle shadow for depth
+      
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', // Adds a subtle shadow for depth
     },
   },
   components: {
