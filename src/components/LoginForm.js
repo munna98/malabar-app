@@ -72,7 +72,7 @@ const LoginForm = () => {
             gutterBottom
             style={{ 
               color: '#ECC290', 
-              fontSize: isSmallScreen ? '1rem' : '1.25rem',
+              fontSize: isSmallScreen ? '0.5rem' : '1.25rem',
               marginTop: isSmallScreen ? '8px' : '16px', // Adjust margin-top for small screens
             }}
           >
@@ -83,7 +83,7 @@ const LoginForm = () => {
             gutterBottom
             style={{ 
               color: '#ECC290', 
-              fontSize: isSmallScreen ? '1.5rem' : '2rem',
+              fontSize: isSmallScreen ? '0.75rem' : '2rem',
               position: 'absolute', 
               bottom: '32px' 
             }}
@@ -153,7 +153,8 @@ const LoginForm = () => {
                 color: '#143326',
                 cursor: 'pointer',
                 textDecoration: 'underline',
-                fontSize: isSmallScreen ? '0.75rem' : '1rem'
+                fontSize: '1rem'
+                // fontSize: isSmallScreen ? '0.75rem' : '1rem'
               }}
               onClick={handleRegister}
             >
