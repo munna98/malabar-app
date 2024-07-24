@@ -9,12 +9,15 @@ import {
   StepLabel,
   useMediaQuery,
   useTheme,
+  IconButton
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import NavBar from '../src/components/NavBar';
 import BasicInfoStep from '@/components/register/BasicInfoStep';
 import MoreInfoStep from '@/components/register/MoreInfoStep';
 import PartnerPreferenceStep from '@/components/register/PartnerPreferenceStep';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Register = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -82,12 +85,20 @@ const Register = () => {
         return 'Unknown step';
     }
   };
-  
+
   const getButtonAlignment = () => {
     if (activeStep === 0) {
       return 'flex-end';
     }
     return 'space-between';
+  };
+
+  // Determine maxWidth based on the number of sections
+  const determineMaxWidth = () => {
+    if (activeStep === 0) {
+      return '500px';
+    }
+    return '1200px';
   };
 
   return (
@@ -111,16 +122,17 @@ const Register = () => {
           alignItems="center"
           justifyContent="center"
           padding={isSmallScreen ? '16px' : '32px'}
-          margin={isSmallScreen && '16px' }
+          margin={isSmallScreen && '16px'}
           sx={{
             bgcolor: "#ECC290",
             borderRadius: '12px',
-            boxShadow: '0 12px 16px rgba(0, 0, 0, 0.1)',
-            maxWidth: '500px',
+            boxShadow: '10px 10px 12px 12px rgba(0, 0, 0, 0.2)',
+            maxWidth: determineMaxWidth(), // Dynamically adjust the width
             width: '100%',
             textAlign: 'center',
           }}
         >
+          
           <Typography
             variant="h4"
             gutterBottom
@@ -141,29 +153,18 @@ const Register = () => {
           {getStepContent(activeStep)}
           <Box mt={2} display="flex" justifyContent={getButtonAlignment()} width="100%">
             {activeStep > 0 && (
-              <Button
+              <IconButton
                 onClick={handleBack}
                 style={{
-                  marginRight: '8px',
                   color: "#143326",
+                  marginRight: '8px',
                 }}
               >
-                Back
-              </Button>
+                <ArrowBackIcon />
+              </IconButton>
             )}
-            {activeStep === steps.length - 1 ? (
-              <Button
-                variant="contained"
-                onClick={handleRegister}
-                style={{
-                  backgroundColor: "#143326",
-                  color: "#ECC290",
-                }}
-              >
-                Register
-              </Button>
-            ) : (
-              <Button
+            {activeStep < steps.length - 1 ? (
+              <IconButton
                 variant="contained"
                 onClick={handleNext}
                 style={{
@@ -171,22 +172,37 @@ const Register = () => {
                   color: "#ECC290",
                 }}
               >
-                Next
-              </Button>
+                <ArrowForwardIcon />
+              </IconButton>
+            ) : (
+              activeStep === steps.length - 1 && (
+                <IconButton
+                  variant="contained"
+                  onClick={handleRegister}
+                  style={{
+                    backgroundColor: "#143326",
+                    color: "#ECC290",
+                  }}
+                >
+                  <ArrowForwardIcon />
+                </IconButton>
+              )
             )}
           </Box>
-          <Typography
-            variant="body2"
-            style={{
-              marginTop: '16px',
-              color: "#143326",
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
-            onClick={() => router.push('/login')}
-          >
-            Already registered? Click here to login
-          </Typography>
+
+          <Box display="flex"
+          flexDirection="row"
+          alignItems="center">
+          {activeStep === 0 && (
+            <Typography
+              variant="body2"
+              style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
+            >
+              Already registered? <a href="/login">Login here</a>
+            </Typography>
+          )}
+
+          </Box>
         </Box>
       </Container>
     </>
