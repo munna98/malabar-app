@@ -1,22 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
   FormControl,
   FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   Select,
   MenuItem,
   InputLabel,
   useMediaQuery,
-  useTheme
+  useTheme,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 
 const MoreInfoStep = ({ formValues, handleChange }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // State to track if "No" is selected
+  const [firstMarriageValue, setFirstMarriageValue] = useState(
+    formValues.firstMarriage
+  );
+
+  const handleFirstMarriageChange = (event, newValue) => {
+    if (newValue !== null) {
+      setFirstMarriageValue(newValue);
+      handleChange({
+        target: { name: "firstMarriage", value: newValue },
+      });
+    }
+  };
+
+  const districts = [
+    "Kasaragod",
+    "Kannur",
+    "Wayanad",
+    "Kozhikode",
+    "Malappuram",
+    "Thrissur",
+    "Palakkad",
+    "Ernakulam",
+    "Kottayam",
+    "Alappuzha",
+    "Pathanamthitta",
+    "Kollam",
+    "Thiruvananthapuram",
+    "Idukki",
+  ];
 
   return (
     <Box
@@ -24,10 +54,10 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
       flexDirection={isSmallScreen ? "column" : "row"}
       justifyContent="space-between"
       width="100%"
-      maxWidth="1200px" // Set maxWidth to 1200px
-      mx="auto" // Center the section horizontally
+      maxWidth="1200px"
+      mx="auto"
       gap={2}
-      p={2} // Add some padding
+      p={2}
     >
       <Box flex={1} display="flex" flexDirection="column" gap={2}>
         <FormControl fullWidth variant="outlined" margin="normal">
@@ -41,26 +71,41 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
             <MenuItem value="Sunni">Sunni</MenuItem>
             <MenuItem value="Salafi">Salafi</MenuItem>
             <MenuItem value="Tablig">Tablig</MenuItem>
-            <MenuItem value="Jama&apos;t">Jama&apos;t</MenuItem>
+            <MenuItem value="Jama't">Jama&apos;t</MenuItem>
           </Select>
         </FormControl>
-        <FormControl
-          component="fieldset"
-          fullWidth
-          margin="normal"
-          style={{ textAlign: "left" }}
-        >
-          <FormLabel component="legend">First Marriage?</FormLabel>
-          <RadioGroup
-            name="firstMarriage"
-            value={formValues.firstMarriage}
-            onChange={handleChange}
-            row
-          >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
+
+        <FormControl fullWidth margin="normal">
+          <Box>
+            <ToggleButtonGroup
+              value={firstMarriageValue}
+              exclusive
+              onChange={handleFirstMarriageChange}
+              fullWidth
+            >
+              <ToggleButton value="yes" fullWidth>
+                First Marriage
+              </ToggleButton>
+              <ToggleButton value="no" fullWidth>
+                No
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
         </FormControl>
+
+        {firstMarriageValue === "no" && (
+          <TextField
+            label="Note, if any"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="note"
+            value={formValues.note}
+            onChange={handleChange}
+            inputProps={{ style: { textAlign: "left" } }}
+          />
+        )}
+
         <TextField
           label="Age"
           variant="outlined"
@@ -91,6 +136,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
           margin="normal"
           fullWidth
           name="madrasaEducation"
+          type="number"
           value={formValues.madrasaEducation}
           onChange={handleChange}
           inputProps={{ style: { textAlign: "left" } }}
@@ -105,18 +151,21 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
           onChange={handleChange}
           inputProps={{ style: { textAlign: "left" } }}
         />
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel>Skin Color</InputLabel>
+          <Select
+            label="Skin Color"
+            name="skinColor"
+            value={formValues.skinColor}
+            onChange={handleChange}
+          >
+            <MenuItem value="fair">Fair</MenuItem>
+            <MenuItem value="medium">Medium</MenuItem>
+            <MenuItem value="dark">Dark</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
-          label="Skin Color"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="skinColor"
-          value={formValues.skinColor}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Height"
+          label="Height (cm)"
           variant="outlined"
           margin="normal"
           fullWidth
@@ -143,16 +192,21 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
             <MenuItem value="heavy">Heavy</MenuItem>
           </Select>
         </FormControl>
-        <TextField
-          label="District"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="district"
-          value={formValues.district}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel>District</InputLabel>
+          <Select
+            label="District"
+            name="district"
+            value={formValues.district}
+            onChange={handleChange}
+          >
+            {districts.map((district) => (
+              <MenuItem key={district} value={district}>
+                {district}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           label="Place"
           variant="outlined"

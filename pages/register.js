@@ -185,11 +185,19 @@ const Register = () => {
           <Box display="flex" flexDirection="row" alignItems="center">
             {activeStep === 0 && (
               <Typography
-                variant="body2"
-                style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
-              >
-                Already registered? <Link href="/login">Login here</Link>
-              </Typography>
+              variant="body2"
+              style={{
+                marginTop: '16px',
+                color: '#143326',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: '1rem'
+                // fontSize: isSmallScreen ? '0.75rem' : '1rem'
+              }}
+              onClick={handleRegister}
+            >
+              Already registered? Login here
+            </Typography>
             )}
           </Box>
         </Box>
