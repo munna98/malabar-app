@@ -116,7 +116,7 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
         
         <Box margin="normal">
           <Typography variant="subtitle1" align="left" gutterBottom>
-            Partner's Age Range
+            Partners&apos Age 
           </Typography>
           <Slider
             value={formValues.partnerAgeRange || [18, 30]}
