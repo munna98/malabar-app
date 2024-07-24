@@ -198,7 +198,7 @@ const Register = () => {
               variant="body2"
               style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
             >
-              Already registered? <a href="/login">Login here</a>
+             Already registered? <Link href="/login">Login here</Link>
             </Typography>
           )}
 
