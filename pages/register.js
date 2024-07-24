@@ -96,6 +96,7 @@ const Register = () => {
           justifyContent: 'center',
           padding: '0',
           margin: '0',
+          backgroundColor: theme.palette.secondary.main, // Set the background color to secondary color (beige)
         }}
       >
         <Box
@@ -105,22 +106,16 @@ const Register = () => {
           justifyContent="center"
           padding={isSmallScreen ? '16px' : '32px'}
           sx={{
-            bgcolor: "#FFFFFF",
+            bgcolor: theme.palette.primary.main, // Set the card background color to primary color (green)
             borderRadius: '12px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             maxWidth: '500px',
             width: '100%',
             textAlign: 'center',
+            color: theme.palette.secondary.main, // Ensure text color contrasts with background
           }}
         >
-          <Typography
-            variant="h4"
-            gutterBottom
-            style={{
-              color: "#143326",
-              fontFamily: 'Cinzel Decorative, serif',
-            }}
-          >
+          <Typography variant="h4" gutterBottom>
             Register
           </Typography>
           <Stepper activeStep={activeStep} alternativeLabel style={{ width: '100%', marginBottom: '24px' }}>
@@ -137,7 +132,7 @@ const Register = () => {
                 onClick={handleBack}
                 style={{
                   marginRight: '8px',
-                  color: "#143326",
+                  color: theme.palette.secondary.main, // Ensure button text color contrasts with background
                 }}
               >
                 Back
@@ -148,8 +143,8 @@ const Register = () => {
                 variant="contained"
                 onClick={handleRegister}
                 style={{
-                  backgroundColor: "#143326",
-                  color: "#ECC290",
+                  backgroundColor: theme.palette.secondary.main, // Ensure button background color contrasts with card background
+                  color: theme.palette.primary.main, // Ensure button text color contrasts with button background
                 }}
               >
                 Register
@@ -159,8 +154,8 @@ const Register = () => {
                 variant="contained"
                 onClick={handleNext}
                 style={{
-                  backgroundColor: "#143326",
-                  color: "#ECC290",
+                  backgroundColor: theme.palette.secondary.main, // Ensure button background color contrasts with card background
+                  color: theme.palette.primary.main, // Ensure button text color contrasts with button background
                 }}
               >
                 Next
@@ -171,7 +166,7 @@ const Register = () => {
             variant="body2"
             style={{
               marginTop: '16px',
-              color: "#143326",
+              color: theme.palette.secondary.main, // Ensure text color contrasts with background
               cursor: 'pointer',
               textDecoration: 'underline',
             }}
