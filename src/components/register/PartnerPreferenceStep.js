@@ -76,9 +76,9 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
     >
       <Box flex="1" minWidth="280px">
         <FormControl fullWidth margin="normal">
-          <InputLabel>Partner's District</InputLabel>
+          <InputLabel>Partner&apos;s District</InputLabel>
           <Select
-            label="Partner's District"
+            label="Partner&apos;s District"
             name="partnerDistrict"
             multiple
             value={formValues.partnerDistrict || []}
@@ -116,7 +116,7 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
         
         <Box margin="normal">
           <Typography variant="subtitle1" align="left" gutterBottom>
-            Partners&apos Age 
+            Partner&apos;s Age Range
           </Typography>
           <Slider
             value={formValues.partnerAgeRange || [18, 30]}
