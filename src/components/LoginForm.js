@@ -21,13 +21,11 @@ const LoginForm = () => {
   const handleLogin = () => {
     console.log("User ID:", userId);
     console.log("Password:", password);
-
-    // Navigate to dynamic profile page
     router.push(`/profile/${userId}`);
   };
 
   const handleRegister = () => {
-    router.push('/register'); // Assuming you have a register page at /register
+    router.push('/register');
   };
 
   return (
@@ -61,11 +59,11 @@ const LoginForm = () => {
             textAlign: 'center',
             height: '100%',
             position: 'relative',
-            paddingTop: isSmallScreen ? '24px' : '32px', // Adjust padding-top for small screens
+            paddingTop: isSmallScreen ? '24px' : '32px',
           }}
         >
           <Box mt={isSmallScreen ? 2 : 4}>
-            <img src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} /> {/* Replace with your logo */}
+            <img src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} />
           </Box>
           <Typography
             variant="h6"
@@ -73,7 +71,7 @@ const LoginForm = () => {
             style={{ 
               color: '#ECC290', 
               fontSize: isSmallScreen ? '0.65rem' : '1.25rem',
-              marginTop: isSmallScreen ? '8px' : '16px', // Adjust margin-top for small screens
+              marginTop: isSmallScreen ? '8px' : '16px',
             }}
           >
             Welcome to the most trusted exclusive Muslim matrimony in Kerala
@@ -128,6 +126,7 @@ const LoginForm = () => {
               fullWidth
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
+              sx={{ ...(theme.palette.mode === 'dark' ? theme.components.MuiTextField.styleOverrides.darkMode : {}) }}
             />
             <TextField
               label="Password"
@@ -137,6 +136,7 @@ const LoginForm = () => {
               fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              sx={{ ...(theme.palette.mode === 'dark' ? theme.components.MuiTextField.styleOverrides.darkMode : {}) }}
             />
             <Button
               variant="contained"
@@ -154,7 +154,6 @@ const LoginForm = () => {
                 cursor: 'pointer',
                 textDecoration: 'underline',
                 fontSize: '1rem'
-                // fontSize: isSmallScreen ? '0.75rem' : '1rem'
               }}
               onClick={handleRegister}
             >

@@ -82,6 +82,13 @@ const Register = () => {
         return 'Unknown step';
     }
   };
+  
+  const getButtonAlignment = () => {
+    if (activeStep === 0) {
+      return 'flex-end';
+    }
+    return 'space-between';
+  };
 
   return (
     <>
@@ -96,7 +103,6 @@ const Register = () => {
           justifyContent: 'center',
           padding: '0',
           margin: '0',
-          backgroundColor: theme.palette.secondary.main, // Set the background color to secondary color (beige)
         }}
       >
         <Box
@@ -105,17 +111,24 @@ const Register = () => {
           alignItems="center"
           justifyContent="center"
           padding={isSmallScreen ? '16px' : '32px'}
+          margin={isSmallScreen && '16px' }
           sx={{
-            bgcolor: theme.palette.primary.main, // Set the card background color to primary color (green)
+            bgcolor: "#ECC290",
             borderRadius: '12px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 12px 16px rgba(0, 0, 0, 0.1)',
             maxWidth: '500px',
             width: '100%',
             textAlign: 'center',
-            color: theme.palette.secondary.main, // Ensure text color contrasts with background
           }}
         >
-          <Typography variant="h4" gutterBottom>
+          <Typography
+            variant="h4"
+            gutterBottom
+            style={{
+              color: "#143326",
+              fontFamily: 'Cinzel Decorative, serif',
+            }}
+          >
             Register
           </Typography>
           <Stepper activeStep={activeStep} alternativeLabel style={{ width: '100%', marginBottom: '24px' }}>
@@ -126,13 +139,13 @@ const Register = () => {
             ))}
           </Stepper>
           {getStepContent(activeStep)}
-          <Box mt={2} display="flex" justifyContent="space-between" width="100%">
+          <Box mt={2} display="flex" justifyContent={getButtonAlignment()} width="100%">
             {activeStep > 0 && (
               <Button
                 onClick={handleBack}
                 style={{
                   marginRight: '8px',
-                  color: theme.palette.secondary.main, // Ensure button text color contrasts with background
+                  color: "#143326",
                 }}
               >
                 Back
@@ -143,8 +156,8 @@ const Register = () => {
                 variant="contained"
                 onClick={handleRegister}
                 style={{
-                  backgroundColor: theme.palette.secondary.main, // Ensure button background color contrasts with card background
-                  color: theme.palette.primary.main, // Ensure button text color contrasts with button background
+                  backgroundColor: "#143326",
+                  color: "#ECC290",
                 }}
               >
                 Register
@@ -154,8 +167,8 @@ const Register = () => {
                 variant="contained"
                 onClick={handleNext}
                 style={{
-                  backgroundColor: theme.palette.secondary.main, // Ensure button background color contrasts with card background
-                  color: theme.palette.primary.main, // Ensure button text color contrasts with button background
+                  backgroundColor: "#143326",
+                  color: "#ECC290",
                 }}
               >
                 Next
@@ -166,7 +179,7 @@ const Register = () => {
             variant="body2"
             style={{
               marginTop: '16px',
-              color: theme.palette.secondary.main, // Ensure text color contrasts with background
+              color: "#143326",
               cursor: 'pointer',
               textDecoration: 'underline',
             }}

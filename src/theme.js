@@ -13,17 +13,15 @@ const theme = createTheme({
   typography: {
     h1: {
       fontFamily: 'Cinzel Decorative, serif',
-      color: '#ECC290', // Light color for better contrast on dark background
     },
     h2: {
       fontFamily: 'Cinzel Decorative, serif',
-      color: '#ECC290', // Light color for better contrast on dark background
     },
     h3: {
       fontFamily: 'Cinzel Decorative, serif',
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#ECC290', // Light color for better contrast on dark background
+      color: '#E56290',
       letterSpacing: '0.05em',
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     },
@@ -31,29 +29,20 @@ const theme = createTheme({
       fontFamily: 'Cinzel Decorative, serif',
       fontSize: '1.75rem',
       fontWeight: 700,
-      color: '#ECC290', // Light color for better contrast on dark background
+      color: '#143326',
       letterSpacing: '0.05em',
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
     },
     h5: {
       fontFamily: 'Cinzel Decorative, serif',
-      color: '#ECC290', // Light color for better contrast on dark background
     },
     h6: {
       fontFamily: 'Cinzel Decorative, serif',
       fontSize: '10px',
       fontWeight: 500,
-      color: '#ECC290', // Light color for better contrast on dark background
+      color: '#ECC290',
       letterSpacing: '0.25em',
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-    },
-    body1: {
-      fontFamily: 'Roboto, sans-serif',
-      color: '#ECC290', // Light color for better contrast on dark background
-    },
-    body2: {
-      fontFamily: 'Roboto, sans-serif',
-      color: '#ECC290', // Light color for better contrast on dark background
     },
   },
   components: {
@@ -85,49 +74,24 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& label.Mui-focused': {
-            color: '#ECC290', // Light color for better contrast on dark background
+            color: '#143326',
           },
           '& .MuiInput-underline:after': {
-            borderBottomColor: '#ECC290', // Light color for better contrast on dark background
+            borderBottomColor: '#143326',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#ECC290', // Light color for better contrast on dark background
+              borderColor: '#143326',
             },
             '&:hover fieldset': {
-              borderColor: '#ECC290', // Light color for better contrast on dark background
+              borderColor: '#143326',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#ECC290', // Light color for better contrast on dark background
+              borderColor: '#143326',
             },
             '& input': {
-              color: '#ECC290', // Light color for better contrast on dark background
+              color: '#143326',
             },
-          },
-        },
-      },
-    },
-    MuiStepper: {
-      styleOverrides: {
-        root: {
-          // Add your styles here
-          backgroundColor: 'transparent', // Example: Make the background transparent
-        },
-        // Styles for the StepIcon component within Stepper
-        stepIcon: {
-          color: '#EEF432', // Default color for icons
-          '&.Mui-active': {
-            color: '#143326', // Color when step is active
-          },
-          '&.Mui-completed': {
-            color: '#ECC296', // Color when step is completed
-          },
-        },
-        // Styles for StepLabel component within Stepper
-        stepLabel: {
-          color: '#ECC296', // Default color for labels
-          '&.Mui-active': {
-            color: '#143326', // Color when step is active
           },
         },
       },
