@@ -11,7 +11,7 @@ import {
   MenuItem,
   InputLabel,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 
 const MoreInfoStep = ({ formValues, handleChange }) => {
@@ -24,10 +24,10 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
       flexDirection={isSmallScreen ? "column" : "row"}
       justifyContent="space-between"
       width="100%"
-      maxWidth="1200px"  // Set maxWidth to 1200px
-      mx="auto"  // Center the section horizontally
+      maxWidth="1200px" // Set maxWidth to 1200px
+      mx="auto" // Center the section horizontally
       gap={2}
-      p={2}  // Add some padding
+      p={2} // Add some padding
     >
       <Box flex={1} display="flex" flexDirection="column" gap={2}>
         <FormControl fullWidth variant="outlined" margin="normal">
@@ -41,7 +41,7 @@ const MoreInfoStep = ({ formValues, handleChange }) => {
             <MenuItem value="Sunni">Sunni</MenuItem>
             <MenuItem value="Salafi">Salafi</MenuItem>
             <MenuItem value="Tablig">Tablig</MenuItem>
-            <MenuItem value="Jama'at">Jama'at</MenuItem>
+            <MenuItem value="Jama&apos;t">Jama&apos;t</MenuItem>
           </Select>
         </FormControl>
         <FormControl

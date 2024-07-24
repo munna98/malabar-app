@@ -1,171 +1,170 @@
-import React from "react";
+// src/components/LoginForm.js
+import React, { useState } from "react";
 import {
-  Box,
+  Button,
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Select,
-  MenuItem,
-  InputLabel,
+  Container,
+  Typography,
+  Box,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
+import { useRouter } from 'next/router';
 
-const MoreInfoStep = ({ formValues, handleChange }) => {
+const LoginForm = () => {
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
+
+  const handleLogin = () => {
+    console.log("User ID:", userId);
+    console.log("Password:", password);
+
+    // Navigate to dynamic profile page
+    router.push(`/profile/${userId}`);
+  };
+
+  const handleRegister = () => {
+    router.push('/register'); // Assuming you have a register page at /register
+  };
 
   return (
-    <Box
-      display="flex"
-      flexDirection={isSmallScreen ? "column" : "row"}
-      justifyContent="space-between"
-      width="100%"
-      maxWidth="1200px" // Set maxWidth to 1200px
-      mx="auto" // Center the section horizontally
-      gap={2}
-      p={2} // Add some padding
+    <Container
+      maxWidth={false}
+      disableGutters
+      style={{
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "0",
+        margin: "0",
+      }}
     >
-      <Box flex={1} display="flex" flexDirection="column" gap={2}>
-        <FormControl fullWidth variant="outlined" margin="normal">
-          <InputLabel>Spirit</InputLabel>
-          <Select
-            label="Spirit"
-            name="spirit"
-            value={formValues.spirit}
-            onChange={handleChange}
-          >
-            <MenuItem value="Sunni">Sunni</MenuItem>
-            <MenuItem value="Salafi">Salafi</MenuItem>
-            <MenuItem value="Tablig">Tablig</MenuItem>
-            <MenuItem value="Jama&apos;t">Jama&apos;t</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl
-          component="fieldset"
-          fullWidth
-          margin="normal"
-          style={{ textAlign: "left" }}
+      <Box
+        display="flex"
+        flexDirection={isSmallScreen ? 'column' : 'row'}
+        width="100%"
+        height="100%"
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          padding="32px"
+          sx={{
+            bgcolor: '#143326',
+            width: isSmallScreen ? '100%' : '50%',
+            textAlign: 'center',
+            height: '100%',
+            position: 'relative',
+            paddingTop: isSmallScreen ? '24px' : '32px', // Adjust padding-top for small screens
+          }}
         >
-          <FormLabel component="legend">First Marriage?</FormLabel>
-          <RadioGroup
-            name="firstMarriage"
-            value={formValues.firstMarriage}
-            onChange={handleChange}
-            row
+          <Box mt={isSmallScreen ? 2 : 4}>
+            <img src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} /> {/* Replace with your logo */}
+          </Box>
+          <Typography
+            variant="h6"
+            gutterBottom
+            style={{ 
+              color: '#ECC290', 
+              fontSize: isSmallScreen ? '0.65rem' : '1.25rem',
+              marginTop: isSmallScreen ? '8px' : '16px', // Adjust margin-top for small screens
+            }}
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
-        <TextField
-          label="Age"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="age"
-          type="number"
-          value={formValues.age}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Education"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="education"
-          value={formValues.education}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-      </Box>
-
-      <Box flex={1} display="flex" flexDirection="column" gap={2}>
-        <TextField
-          label="Madrasa Education"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="madrasaEducation"
-          value={formValues.madrasaEducation}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Job"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="job"
-          value={formValues.job}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Skin Color"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="skinColor"
-          value={formValues.skinColor}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Height"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="height"
-          type="number"
-          value={formValues.height}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-      </Box>
-
-      <Box flex={1} display="flex" flexDirection="column" gap={2}>
-        <FormControl fullWidth variant="outlined" margin="normal">
-          <InputLabel>Body Type</InputLabel>
-          <Select
-            label="Body Type"
-            name="bodyType"
-            value={formValues.bodyType}
-            onChange={handleChange}
+            Welcome to the most trusted exclusive Muslim matrimony in Kerala
+          </Typography>
+          <Typography
+            variant="h3"
+            gutterBottom
+            style={{ 
+              color: '#ECC290', 
+              fontSize: isSmallScreen ? '0.8rem' : '2rem',
+              position: 'absolute', 
+              bottom: '32px' 
+            }}
           >
-            <MenuItem value="slim">Slim</MenuItem>
-            <MenuItem value="average">Average</MenuItem>
-            <MenuItem value="athletic">Athletic</MenuItem>
-            <MenuItem value="heavy">Heavy</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          label="District"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="district"
-          value={formValues.district}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
-        <TextField
-          label="Place"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          name="place"
-          value={formValues.place}
-          onChange={handleChange}
-          inputProps={{ style: { textAlign: "left" } }}
-        />
+            Manavatty from Malabar
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          padding="32px"
+          sx={{
+            bgcolor: '#ECC290',
+            width: isSmallScreen ? '100%' : '50%',
+            textAlign: 'center',
+            height: '100%',
+          }}
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width={isSmallScreen ? '100%' : '500px'}
+          >
+            <Typography
+              variant="h4"
+              gutterBottom
+              style={{ 
+                color: '#143326', 
+                fontSize: isSmallScreen ? '1.25rem' : '1.75rem' 
+              }}
+            >
+              Login
+            </Typography>
+            <TextField
+              label="User ID"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleLogin}
+              style={{ marginTop: '16px' }}
+            >
+              Login
+            </Button>
+            <Typography
+              variant="body2"
+              style={{
+                marginTop: '16px',
+                color: '#143326',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: '1rem'
+                // fontSize: isSmallScreen ? '0.75rem' : '1rem'
+              }}
+              onClick={handleRegister}
+            >
+              Not registered yet? Register here
+            </Typography>
+          </Box>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 
-export default MoreInfoStep;
+export default LoginForm;
