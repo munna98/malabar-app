@@ -12,6 +12,7 @@ import {
   IconButton
 } from '@mui/material';
 import { useRouter } from 'next/router';
+import Link from 'next/link';  // Import Link from next/link
 import NavBar from '../src/components/NavBar';
 import BasicInfoStep from '@/components/register/BasicInfoStep';
 import MoreInfoStep from '@/components/register/MoreInfoStep';
@@ -132,7 +133,14 @@ const Register = () => {
             textAlign: 'center',
           }}
         >
-          
+          {activeStep === 0 && (
+            <Typography
+              variant="body2"
+              style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
+            >
+              Already registered? <Link href="/login">Login here</Link>
+            </Typography>
+          )}
           <Typography
             variant="h4"
             gutterBottom
@@ -188,20 +196,6 @@ const Register = () => {
                 </IconButton>
               )
             )}
-          </Box>
-
-          <Box display="flex"
-          flexDirection="row"
-          alignItems="center">
-          {activeStep === 0 && (
-            <Typography
-              variant="body2"
-              style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
-            >
-             Already registered? <Link href="/login">Login here</Link>
-            </Typography>
-          )}
-
           </Box>
         </Box>
       </Container>
