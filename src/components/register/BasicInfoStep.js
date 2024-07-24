@@ -1,9 +1,16 @@
 import React from 'react';
 import { Box, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const BasicInfoStep = ({ formValues, handleChange, handlePhoneChange, isSmallScreen }) => (
-  <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
+  <Box
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+    justifyContent="center"
+    width={isSmallScreen ? '100%' : '500px'}
+  >
     <TextField
       label="Name"
       variant="outlined"

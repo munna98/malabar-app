@@ -12,7 +12,7 @@ import {
   IconButton
 } from '@mui/material';
 import { useRouter } from 'next/router';
-import Link from 'next/link';  // Import Link from next/link
+import Link from 'next/link';
 import NavBar from '../src/components/NavBar';
 import BasicInfoStep from '@/components/register/BasicInfoStep';
 import MoreInfoStep from '@/components/register/MoreInfoStep';
@@ -94,27 +94,20 @@ const Register = () => {
     return 'space-between';
   };
 
-  // Determine maxWidth based on the number of sections
-  const determineMaxWidth = () => {
-    if (activeStep === 0) {
-      return '500px';
-    }
-    return '1200px';
-  };
-
   return (
     <>
       <NavBar />
       <Container
         maxWidth={false}
         disableGutters
-        style={{
-          height: 'calc(100vh - 64px)', // Adjust height to account for the NavBar height
+        sx={{
+          minHeight: 'calc(100vh - 64px)', // Adjust height to account for the NavBar height
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           padding: '0',
           margin: '0',
+          overflowY: 'auto', // Add vertical scroll to the page
         }}
       >
         <Box
@@ -127,20 +120,12 @@ const Register = () => {
           sx={{
             bgcolor: "#ECC290",
             borderRadius: '12px',
-            boxShadow: '10px 10px 12px 12px rgba(0, 0, 0, 0.2)',
-            maxWidth: determineMaxWidth(), // Dynamically adjust the width
+            // boxShadow: '10px 10px 12px 12px rgba(0, 0, 0, 0.2)',
+            maxWidth: '1100px', // Ensure the card fits well within the page
             width: '100%',
             textAlign: 'center',
           }}
         >
-          {activeStep === 0 && (
-            <Typography
-              variant="body2"
-              style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
-            >
-              Already registered? <Link href="/login">Login here</Link>
-            </Typography>
-          )}
           <Typography
             variant="h4"
             gutterBottom
@@ -195,6 +180,16 @@ const Register = () => {
                   <ArrowForwardIcon />
                 </IconButton>
               )
+            )}
+          </Box>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            {activeStep === 0 && (
+              <Typography
+                variant="body2"
+                style={{ alignSelf: 'flex-end', marginBottom: '16px' }}
+              >
+                Already registered? <Link href="/login">Login here</Link>
+              </Typography>
             )}
           </Box>
         </Box>
