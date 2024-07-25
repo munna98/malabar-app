@@ -10,11 +10,13 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Profile = () => {
   const router = useRouter();
   const { id } = router.query;
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   // Sample user data
   const userData = {
@@ -47,24 +49,24 @@ const Profile = () => {
     <div>
       <NavBar />
       <Container>
-        <Box m={1} ml={0} mr={0} display="flex" justifyContent="center" alignItems="center">
+        <Box m={isSmallScreen ? 1 : 2} ml={isSmallScreen ? 0 : 2} mr={isSmallScreen ? 0 : 2} display="flex" justifyContent="center" alignItems="center">
           <Card style={{ width: '100%', maxWidth: '1100px', borderRadius: '16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={4} display="flex" flexDirection="column" alignItems="center" justifyContent="center" style={{ backgroundColor: '#143326', color: '#F2E8CF', textAlign: 'center', padding: '24px', borderRadius: '16px 0 0 16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
-                <Box p={2} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+            <Grid container spacing={isSmallScreen ? 1 : 2}>
+              <Grid item xs={12} md={4} display="flex" flexDirection="column" alignItems="center" justifyContent="center" style={{ backgroundColor: '#143326', color: '#F2E8CF', textAlign: 'center', padding: isSmallScreen ? '16px' : '24px', borderRadius: '16px 0 0 16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
+                <Box p={isSmallScreen ? 1 : 2} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
                   <Avatar src={userData.avatar} alt={userData.name} style={{ width: '80px', height: '80px', marginBottom: '16px', border: '3px solid #F2E8CF', borderRadius: '50%', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }} />
                   <Typography variant="h5" style={{ marginBottom: '8px' }}>{userData.name}</Typography>
                   <Typography variant="body2" style={{ textTransform: 'capitalize', marginBottom: '4px' }}>{userData.role}</Typography>
                   <Typography variant="body2"><strong>Profile ID:</strong> {userData.profileid}</Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={8} style={{ backgroundColor: '#F2E8CF', color: '#143326', padding: '32px', borderRadius: '0 16px 16px 0', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
+              <Grid item xs={12} md={8} style={{ backgroundColor: '#F2E8CF', color: '#143326', padding: isSmallScreen ? '16px' : '32px', borderRadius: '0 16px 16px 0', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
                 <CardContent>
-                  <Grid container spacing={2}>
+                  <Grid container spacing={isSmallScreen ? 1 : 2}>
                     <Grid item xs={12} md={6}>
-                      <Card  style={{ padding: '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: '16px' }}>
+                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: isSmallScreen ? '8px' : '16px' }}>
                         <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>More Info</Typography>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={isSmallScreen ? 1 : 2}>
                           <Grid item xs={12}>
                             <Typography variant="body1"><strong>Country:</strong> {userData.country}</Typography>
                           </Grid>
@@ -108,9 +110,9 @@ const Profile = () => {
                       </Card>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: '16px' }}>
+                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: isSmallScreen ? '8px' : '16px' }}>
                         <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>Partner Preference</Typography>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={isSmallScreen ? 1 : 2}>
                           <Grid item xs={12}>
                             <Typography variant="body1"><strong>Partner District:</strong> {userData.partnerDistrict}</Typography>
                           </Grid>
@@ -119,7 +121,7 @@ const Profile = () => {
                           </Grid>
                         </Grid>
                       </Card>
-                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
+                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
                         <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>Demands</Typography>
                         <Typography variant="body1">{userData.additionalInfo1}</Typography>
                         <Typography variant="body1">{userData.additionalInfo2}</Typography>
