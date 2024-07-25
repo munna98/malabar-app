@@ -47,7 +47,7 @@ const Profile = () => {
     <div>
       <NavBar />
       <Container>
-        <Box m={2} display="flex" justifyContent="center" alignItems="center">
+        <Box m={1} ml={0} mr={0} display="flex" justifyContent="center" alignItems="center">
           <Card style={{ width: '100%', maxWidth: '1100px', borderRadius: '16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
             <Grid container spacing={2}>
               <Grid item xs={12} md={4} display="flex" flexDirection="column" alignItems="center" justifyContent="center" style={{ backgroundColor: '#143326', color: '#F2E8CF', textAlign: 'center', padding: '24px', borderRadius: '16px 0 0 16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
@@ -62,7 +62,7 @@ const Profile = () => {
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: '16px' }}>
+                      <Card  style={{ padding: '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: '16px' }}>
                         <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>More Info</Typography>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
