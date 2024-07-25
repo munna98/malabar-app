@@ -41,7 +41,7 @@ const Profile = () => {
     role: 'bride',
     country: 'India',
     mobile: '+91 82899-54228',
-    name: 'eyainaba',
+    name: 'Sainaba',
     spirit: 'Tabligh',
     firstMarriage: 'No',
     age: '30',
@@ -76,7 +76,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>{userData.name}'s Profile | Your App Name</title>
+        <title>{userData.name}&#39;s Profile | Your App Name</title>
         <meta name="description" content={`Profile page for ${userData.name}`} />
       </Head>
       <NavBar />
