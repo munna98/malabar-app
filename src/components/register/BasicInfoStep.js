@@ -23,8 +23,8 @@ const BasicInfoStep = ({
     width={isSmallScreen ? "100%" : "500px"}
   >
     <FormControl component="fieldset" fullWidth margin="normal">
-      <Box
-      >
+      <FormLabel component="legend" sx={{ textAlign: "left" }}>Bride / Groom?</FormLabel>
+      <Box>
         <ToggleButtonGroup
           value={formValues.role}
           exclusive
@@ -46,6 +46,7 @@ const BasicInfoStep = ({
         </ToggleButtonGroup>
       </Box>
     </FormControl>
+    
     <TextField
       label="Name"
       variant="outlined"
@@ -56,15 +57,18 @@ const BasicInfoStep = ({
       onChange={handleChange}
       inputProps={{ style: { textAlign: "left" } }}
     />
-    <MuiPhoneNumber
-      defaultCountry={"us"}
-      value={formValues.mobile}
-      onChange={handlePhoneChange}
-      variant="outlined"
-      fullWidth
-      margin="normal"
-      inputProps={{ style: { textAlign: "left" } }}
-    />
+    
+    <FormControl fullWidth margin="normal">
+      <FormLabel sx={{ textAlign: "left" }}>Mobile</FormLabel>
+      <MuiPhoneNumber
+        defaultCountry={"in"}
+        value={formValues.mobile}
+        onChange={handlePhoneChange}
+        variant="outlined"
+        fullWidth
+        inputProps={{ style: { textAlign: "left" } }}
+      />
+    </FormControl>
   </Box>
 );
 

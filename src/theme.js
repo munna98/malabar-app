@@ -38,11 +38,11 @@ const theme = createTheme({
     },
     h6: {
       fontFamily: 'Cinzel Decorative, serif',
-      fontSize: '10px',
-      fontWeight: 500,
+      fontSize: '12px',
+      fontWeight: 700,
       color: '#ECC290',
       letterSpacing: '0.25em',
-      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)',
     },
   },
   components: {
