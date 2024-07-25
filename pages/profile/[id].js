@@ -1,30 +1,47 @@
 // pages/profile/[id].js
 import React from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { 
+  Container, 
+  Card, 
+  CardContent, 
+  Grid, 
+  Avatar as MuiAvatar, 
+  Box, 
+  Typography, 
+  useMediaQuery, 
+  Tooltip, 
+  IconButton,
+} from '@mui/material';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from '@mui/icons-material/School';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeightIcon from '@mui/icons-material/Height';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import CakeIcon from '@mui/icons-material/Cake';
+import HomeIcon from '@mui/icons-material/Home';
+
 import NavBar from '../../src/components/NavBar';
-import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import theme from '../../src/theme';
+import { generateAvatar } from '../../src/utils/avatar';
 
 const Profile = () => {
   const router = useRouter();
   const { id } = router.query;
-  const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   // Sample user data
   const userData = {
-    profileid: id || 'N/A', // Display 'N/A' if id is not available
+    profileid: id || 'N/A',
     role: 'bride',
     country: 'India',
     mobile: '+91 82899-54228',
-    name: 'Sainaba',
+    name: 'eyainaba',
     spirit: 'Tabligh',
     firstMarriage: 'No',
     age: '30',
@@ -42,89 +59,67 @@ const Profile = () => {
     additionalInfo1: 'Loves hiking and outdoor activities.',
     additionalInfo2: 'Enjoys reading science fiction.',
     additionalInfo3: 'Active in local community service.',
-    avatar: '/images/avatar.jpg', // Replace with actual path to avatar
+    // Remove the avatar path since we will generate it dynamically
   };
 
+  const InfoItem = ({ icon, label, value }) => (
+    <Box display="flex" alignItems="center" mb={2}>
+      <Tooltip title={label}>
+        <IconButton size="small" style={{ marginRight: '12px', color: theme.palette.primary.main }}>
+          {icon}
+        </IconButton>
+      </Tooltip>
+      <Typography variant="body1"><strong>{label}:</strong> {value}</Typography>
+    </Box>
+  );
+
   return (
-    <div>
+    <>
+      <Head>
+        <title>{userData.name}'s Profile | Your App Name</title>
+        <meta name="description" content={`Profile page for ${userData.name}`} />
+      </Head>
       <NavBar />
-      <Container>
-        <Box m={isSmallScreen ? 1 : 2} ml={isSmallScreen ? 0 : 2} mr={isSmallScreen ? 0 : 2} display="flex" justifyContent="center" alignItems="center">
-          <Card style={{ width: '100%', maxWidth: '1100px', borderRadius: '16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
-            <Grid container spacing={isSmallScreen ? 1 : 2}>
-              <Grid item xs={12} md={4} display="flex" flexDirection="column" alignItems="center" justifyContent="center" style={{ backgroundColor: '#143326', color: '#F2E8CF', textAlign: 'center', padding: isSmallScreen ? '16px' : '24px', borderRadius: '16px 0 0 16px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
-                <Box p={isSmallScreen ? 1 : 2} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                  <Avatar src={userData.avatar} alt={userData.name} style={{ width: '80px', height: '80px', marginBottom: '16px', border: '3px solid #F2E8CF', borderRadius: '50%', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }} />
-                  <Typography variant="h5" style={{ marginBottom: '8px' }}>{userData.name}</Typography>
-                  <Typography variant="body2" style={{ textTransform: 'capitalize', marginBottom: '4px' }}>{userData.role}</Typography>
-                  <Typography variant="body2"><strong>Profile ID:</strong> {userData.profileid}</Typography>
-                </Box>
+      <Container maxWidth="lg">
+        <Box my={4} display="flex" justifyContent="center" alignItems="center">
+          <Card style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>
+            <Grid container>
+              <Grid item xs={12} md={4} style={{ backgroundColor: theme.palette.primary.main, color: theme.palette.secondary.main, padding: isSmallScreen ? '24px' : '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                {/* Use the generateAvatar function to generate the avatar */}
+                {generateAvatar(userData.name, 120)}
+                <Typography variant="h3" style={{ marginBottom: '8px' }}>{userData.name}</Typography>
+                <Typography variant="h6" style={{ textTransform: 'capitalize', marginBottom: '8px' }}>{userData.role}</Typography>
+                <Typography variant="body1"><strong>Profile ID:</strong> {userData.profileid}</Typography>
               </Grid>
-              <Grid item xs={12} md={8} style={{ backgroundColor: '#F2E8CF', color: '#143326', padding: isSmallScreen ? '16px' : '32px', borderRadius: '0 16px 16px 0', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
+              <Grid item xs={12} md={8} style={{ backgroundColor: theme.palette.secondary.main, color: theme.palette.primary.main, padding: isSmallScreen ? '24px' : '32px' }}>
                 <CardContent>
-                  <Grid container spacing={isSmallScreen ? 1 : 2}>
+                  <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: isSmallScreen ? '8px' : '16px' }}>
-                        <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>More Info</Typography>
-                        <Grid container spacing={isSmallScreen ? 1 : 2}>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Country:</strong> {userData.country}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Mobile:</strong> {userData.mobile}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Spirit:</strong> {userData.spirit}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>First Marriage:</strong> {userData.firstMarriage}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Age:</strong> {userData.age}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Education:</strong> {userData.education}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Madrasa Education:</strong> {userData.madrasaEducation}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Job:</strong> {userData.job}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Skin Color:</strong> {userData.skinColor}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Height:</strong> {userData.height}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Body Type:</strong> {userData.bodyType}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>District:</strong> {userData.district}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Place:</strong> {userData.place}</Typography>
-                          </Grid>
-                        </Grid>
+                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', height: '100%' }}>
+                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Personal Information</Typography>
+                        <InfoItem icon={<LocationOnIcon />} label="Country" value={userData.country} />
+                        <InfoItem icon={<PhoneIcon />} label="Mobile" value={userData.mobile} />
+                        <InfoItem icon={<FavoriteIcon />} label="Spirit" value={userData.spirit} />
+                        <InfoItem icon={<SchoolIcon />} label="Education" value={userData.education} />
+                        <InfoItem icon={<WorkIcon />} label="Job" value={userData.job} />
+                        <InfoItem icon={<CakeIcon />} label="Age" value={userData.age} />
+                        <InfoItem icon={<ColorLensIcon />} label="Skin Color" value={userData.skinColor} />
+                        <InfoItem icon={<HeightIcon />} label="Height" value={userData.height} />
+                        <InfoItem icon={<FitnessCenterIcon />} label="Body Type" value={userData.bodyType} />
+                        <InfoItem icon={<HomeIcon />} label="District" value={userData.district} />
+                        <InfoItem icon={<SchoolIcon />} label="Madrasa Education" value={userData.madrasaEducation} />
                       </Card>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginBottom: isSmallScreen ? '8px' : '16px' }}>
-                        <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>Partner Preference</Typography>
-                        <Grid container spacing={isSmallScreen ? 1 : 2}>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Partner District:</strong> {userData.partnerDistrict}</Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography variant="body1"><strong>Partner Age:</strong> {userData.partnerAgeFrom} - {userData.partnerAgeTo}</Typography>
-                          </Grid>
-                        </Grid>
+                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', marginBottom: '24px' }}>
+                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Partner Preference</Typography>
+                        <InfoItem icon={<LocationOnIcon />} label="Partner District" value={userData.partnerDistrict} />
+                        <InfoItem icon={<FavoriteIcon />} label="Partner Age" value={`${userData.partnerAgeFrom} - ${userData.partnerAgeTo}`} />
                       </Card>
-                      <Card style={{ padding: isSmallScreen ? '12px' : '16px', borderRadius: '12px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
-                        <Typography variant="h6" style={{ marginBottom: '16px', color: '#143326' }}>Demands</Typography>
-                        <Typography variant="body1">{userData.additionalInfo1}</Typography>
-                        <Typography variant="body1">{userData.additionalInfo2}</Typography>
+                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Additional Information</Typography>
+                        <Typography variant="body1" paragraph>{userData.additionalInfo1}</Typography>
+                        <Typography variant="body1" paragraph>{userData.additionalInfo2}</Typography>
                         <Typography variant="body1">{userData.additionalInfo3}</Typography>
                       </Card>
                     </Grid>
@@ -135,7 +130,7 @@ const Profile = () => {
           </Card>
         </Box>
       </Container>
-    </div>
+    </>
   );
 };
 

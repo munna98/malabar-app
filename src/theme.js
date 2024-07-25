@@ -21,7 +21,7 @@ const theme = createTheme({
       fontFamily: 'Cinzel Decorative, serif',
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#E56290',
+      color: '#ECC290',
       letterSpacing: '0.05em',
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     },
