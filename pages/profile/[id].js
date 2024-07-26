@@ -131,10 +131,10 @@ const Profile = () => {
                           <InfoItem key={item.label} icon={item.icon} label={item.label} value={item.value} index={index} />
                         ))}
                       </Card>
-                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', marginTop: '22px' }}>
                         <Typography variant="h5" style={{ marginBottom: '16px' }}>Additional Information</Typography>
                         {additionalInfoItems.map((info, index) => (
-                          <Typography key={index} variant="body1" style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff' }}>
+                          <Typography key={index} variant="body1" style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff', padding: '8px' }}>
                             {info}
                           </Typography>
                         ))}
