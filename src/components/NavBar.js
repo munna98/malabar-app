@@ -4,6 +4,7 @@ import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button } from '@mui/materi
 import PersonIcon from '@mui/icons-material/Person';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,7 +27,11 @@ const NavBar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Image src="/logo.png" alt="Logo" width={100} height={50} /> {/* Replace with your logo */}
+        <Link href="/" passHref>
+          <IconButton edge="start" color="inherit" aria-label="home">
+            <Image src="/logo.png" alt="Logo" width={100} height={50} /> {/* Replace with your logo */}
+          </IconButton>
+        </Link>
         <div style={{ flexGrow: 1 }} />
         <Button color="inherit" onClick={() => router.push('/login')}>
           Login
