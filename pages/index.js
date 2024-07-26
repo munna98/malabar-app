@@ -1,11 +1,11 @@
 
-
 import React, { useState } from 'react';
 import NavBar from '../src/components/NavBar';
 import UserCard from '../src/components/UserCard';
 
 const Home = () => {
   const [expandedCardId, setExpandedCardId] = useState(null);
+  const [isUserRegistered, setIsUserRegistered] = useState(false); // Assume the user is not registered by default
 
   const handleExpandClick = (cardId) => {
     setExpandedCardId(expandedCardId === cardId ? null : cardId);
@@ -34,6 +34,7 @@ const Home = () => {
             user={user}
             isExpanded={expandedCardId === user.profileId}
             onExpand={() => handleExpandClick(user.profileId)}
+            isRegistered={isUserRegistered}
           />
         ))}
       </div>

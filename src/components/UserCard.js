@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Grid, Typography, IconButton, Collapse } from '@mui/material';
+import { Card, CardContent, Grid, Typography, IconButton, Collapse, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import {
@@ -17,7 +17,13 @@ import {
 } from '@mui/icons-material';
 import { generateAvatar } from '../utils/avatar';
 
-const UserCard = ({ user, isExpanded, onExpand }) => {
+const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
+  const handleRequestMobile = () => {
+    // Implement the logic for requesting mobile number
+    console.log('Requesting mobile number for user:', user.profileId);
+    // You might want to open a modal or navigate to a registration page here
+  };
+
   return (
     <Card
       style={{
@@ -26,54 +32,55 @@ const UserCard = ({ user, isExpanded, onExpand }) => {
         boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
         width: '100%',
         overflow: 'hidden',
-        position: 'relative', // Allows positioning of the expand button
+        position: 'relative',
       }}
     >
       <CardContent
         style={{
           backgroundColor: '#143326',
           color: '#fff',
-          position: 'relative', // Ensures the profileId and date are positioned relative to this container
+          position: 'relative',
+          padding: '16px',
         }}
       >
-        {/* Container for profileId and date */}
-        <div style={{
-          position: 'absolute',
-          top: '8px',
-          right: '8px',
-          color: '#fff',
-          textAlign: 'right',
-        }}>
-          <Typography variant="body2" style={{ fontSize: '0.75rem' }}>ID: {user.profileId}</Typography>
-          <Typography variant="body2" style={{ fontSize: '0.75rem' }}>Date: {user.date}</Typography>
-        </div>
-
         <Grid container alignItems="center" spacing={2}>
-          <Grid item xs={3} sm={2} md={1}>
-            {generateAvatar(user.name, 60)}
+          <Grid item xs={9} sm={10}>
+            <Grid container alignItems="center" spacing={6}>
+              <Grid item xs={3} sm={2} md={1}>
+                {generateAvatar(user.name, 60)}
+              </Grid>
+              <Grid item xs={9} sm={10} md={11} >
+                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.role}</Typography>
+                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>Age: {user.age}</Typography>
+                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>District: {user.district}</Typography>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={7} sm={8} md={9}>
-            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.role}</Typography>
-            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>Age: {user.age}</Typography>
-            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>District: {user.district}</Typography>
+          <Grid item xs={3} sm={2}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              height: '100%',
+              justifyContent: 'space-between',
+            }}>
+              <Typography variant="body2" style={{ fontSize: '0.75rem' }}>ID: {user.profileId}</Typography>
+              <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.date}</Typography>
+              <IconButton 
+                onClick={onExpand} 
+                aria-expanded={isExpanded} 
+                style={{ 
+                  color: '#fff',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  padding: '4px',
+                }}
+              >
+                {isExpanded ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
+              </IconButton>
+            </div>
           </Grid>
         </Grid>
       </CardContent>
-      
-      {/* Button positioned at the bottom */}
-      <div style={{
-        position: 'absolute',
-        bottom: '8px',
-        right: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px', // Space between the button and the edge of the card
-      }}>
-        <IconButton onClick={onExpand} aria-expanded={isExpanded} style={{ color: isExpanded ? '#143326' : '#fff' }}>
-          {isExpanded ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
-        </IconButton>
-      </div>
-
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
         <CardContent
           style={{
@@ -143,7 +150,20 @@ const UserCard = ({ user, isExpanded, onExpand }) => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
-                <MobileIcon fontSize="small" style={{ marginRight: '4px' }} /> Mobile: {user.mobile}
+                <MobileIcon fontSize="small" style={{ marginRight: '4px' }} />
+                {isRegistered ? (
+                  `Mobile: ${user.mobile}`
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={handleRequestMobile}
+                    style={{ marginLeft: '8px', fontSize: '0.75rem' }}
+                  >
+                    Request Mobile No
+                  </Button>
+                )}
               </Typography>
             </Grid>
             {user.additionalInfo1 && (
