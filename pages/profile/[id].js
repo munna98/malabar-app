@@ -7,7 +7,6 @@ import {
   Card, 
   CardContent, 
   Grid, 
-  Avatar as MuiAvatar, 
   Box, 
   Typography, 
   useMediaQuery, 
@@ -15,7 +14,6 @@ import {
   IconButton,
 } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
@@ -59,11 +57,10 @@ const Profile = () => {
     additionalInfo1: 'Loves hiking and outdoor activities.',
     additionalInfo2: 'Enjoys reading science fiction.',
     additionalInfo3: 'Active in local community service.',
-    // Remove the avatar path since we will generate it dynamically
   };
 
-  const InfoItem = ({ icon, label, value }) => (
-    <Box display="flex" alignItems="center" mb={2}>
+  const InfoItem = ({ icon, label, value, index }) => (
+    <Box display="flex" alignItems="center" mb={2} style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff' }}>
       <Tooltip title={label}>
         <IconButton size="small" style={{ marginRight: '12px', color: theme.palette.primary.main }}>
           {icon}
@@ -72,6 +69,31 @@ const Profile = () => {
       <Typography variant="body1"><strong>{label}:</strong> {value}</Typography>
     </Box>
   );
+
+  const personalInfoItems = [
+    { icon: <LocationOnIcon />, label: 'Country', value: userData.country },
+    { icon: <PhoneIcon />, label: 'Mobile', value: userData.mobile },
+    { icon: <FavoriteIcon />, label: 'Spirit', value: userData.spirit },
+    { icon: <SchoolIcon />, label: 'Education', value: userData.education },
+    { icon: <WorkIcon />, label: 'Job', value: userData.job },
+    { icon: <CakeIcon />, label: 'Age', value: userData.age },
+    { icon: <ColorLensIcon />, label: 'Skin Color', value: userData.skinColor },
+    { icon: <HeightIcon />, label: 'Height', value: userData.height },
+    { icon: <FitnessCenterIcon />, label: 'Body Type', value: userData.bodyType },
+    { icon: <HomeIcon />, label: 'District', value: userData.district },
+    { icon: <SchoolIcon />, label: 'Madrasa Education', value: userData.madrasaEducation },
+  ];
+
+  const partnerInfoItems = [
+    { icon: <LocationOnIcon />, label: 'Partner District', value: userData.partnerDistrict },
+    { icon: <FavoriteIcon />, label: 'Partner Age', value: `${userData.partnerAgeFrom} - ${userData.partnerAgeTo}` },
+  ];
+
+  const additionalInfoItems = [
+    userData.additionalInfo1,
+    userData.additionalInfo2,
+    userData.additionalInfo3,
+  ];
 
   return (
     <>
@@ -91,36 +113,31 @@ const Profile = () => {
                 <Typography variant="h6" style={{ textTransform: 'capitalize', marginBottom: '8px' }}>{userData.role}</Typography>
                 <Typography variant="body1"><strong>Profile ID:</strong> {userData.profileid}</Typography>
               </Grid>
-              <Grid item xs={12} md={8} style={{ backgroundColor: theme.palette.secondary.main, color: theme.palette.primary.main, padding: isSmallScreen ? '24px' : '32px' }}>
+              <Grid item xs={12} md={8}>
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', height: '100%' }}>
+                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                         <Typography variant="h5" style={{ marginBottom: '16px' }}>Personal Information</Typography>
-                        <InfoItem icon={<LocationOnIcon />} label="Country" value={userData.country} />
-                        <InfoItem icon={<PhoneIcon />} label="Mobile" value={userData.mobile} />
-                        <InfoItem icon={<FavoriteIcon />} label="Spirit" value={userData.spirit} />
-                        <InfoItem icon={<SchoolIcon />} label="Education" value={userData.education} />
-                        <InfoItem icon={<WorkIcon />} label="Job" value={userData.job} />
-                        <InfoItem icon={<CakeIcon />} label="Age" value={userData.age} />
-                        <InfoItem icon={<ColorLensIcon />} label="Skin Color" value={userData.skinColor} />
-                        <InfoItem icon={<HeightIcon />} label="Height" value={userData.height} />
-                        <InfoItem icon={<FitnessCenterIcon />} label="Body Type" value={userData.bodyType} />
-                        <InfoItem icon={<HomeIcon />} label="District" value={userData.district} />
-                        <InfoItem icon={<SchoolIcon />} label="Madrasa Education" value={userData.madrasaEducation} />
+                        {personalInfoItems.map((item, index) => (
+                          <InfoItem key={item.label} icon={item.icon} label={item.label} value={item.value} index={index} />
+                        ))}
                       </Card>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', marginBottom: '24px' }}>
+                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                         <Typography variant="h5" style={{ marginBottom: '16px' }}>Partner Preference</Typography>
-                        <InfoItem icon={<LocationOnIcon />} label="Partner District" value={userData.partnerDistrict} />
-                        <InfoItem icon={<FavoriteIcon />} label="Partner Age" value={`${userData.partnerAgeFrom} - ${userData.partnerAgeTo}`} />
+                        {partnerInfoItems.map((item, index) => (
+                          <InfoItem key={item.label} icon={item.icon} label={item.label} value={item.value} index={index} />
+                        ))}
                       </Card>
-                      <Card style={{ padding: '24px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                      <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                         <Typography variant="h5" style={{ marginBottom: '16px' }}>Additional Information</Typography>
-                        <Typography variant="body1" paragraph>{userData.additionalInfo1}</Typography>
-                        <Typography variant="body1" paragraph>{userData.additionalInfo2}</Typography>
-                        <Typography variant="body1">{userData.additionalInfo3}</Typography>
+                        {additionalInfoItems.map((info, index) => (
+                          <Typography key={index} variant="body1" style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff' }}>
+                            {info}
+                          </Typography>
+                        ))}
                       </Card>
                     </Grid>
                   </Grid>
