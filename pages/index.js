@@ -1,7 +1,7 @@
 // Home.js
 import React, { useState } from 'react';
 import NavBar from '../src/components/NavBar';
-import UserCards from '@/components/user/userCards';
+
 
 
 
