@@ -1,7 +1,8 @@
 // src/components/NavBar.js
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button, useMediaQuery, Typography, Box } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button, useMediaQuery, Typography, Box, Select, FormControl } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import PersonIcon from '@mui/icons-material/Person';
 import { useTheme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -9,6 +10,7 @@ import Image from 'next/image';
 const NavBar = ({ isLoggedIn, username }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [language, setLanguage] = useState('en');
   const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -32,20 +34,31 @@ const NavBar = ({ isLoggedIn, username }) => {
     handleMenuClose();
   };
 
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
-      PaperProps={{
+      MenuProps={{
         style: {
           width: '200px', // Adjust width as needed
         },
       }}
     >
-      <MenuItem onClick={() => router.push('/profile/[id]')}>My Profile</MenuItem>
+      <MenuItem onClick={() => router.push('/')}>Home</MenuItem>
+      {isLoggedIn ? (
+        <>
+          <MenuItem onClick={() => router.push('/profile/[id]')}>My Profile</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </>
+      ) : (
+        <MenuItem onClick={() => router.push('/login')}>Login</MenuItem>
+      )}
       <MenuItem onClick={() => router.push('/register')}>Register</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -54,42 +67,51 @@ const NavBar = ({ isLoggedIn, username }) => {
       anchorEl={mobileMoreAnchorEl}
       open={Boolean(mobileMoreAnchorEl)}
       onClose={handleMenuClose}
-      PaperProps={{
+      MenuProps={{
         style: {
           width: '200px', // Adjust width as needed
         },
       }}
     >
-      <MenuItem onClick={() => router.push('/profile/[id]')}>My Profile</MenuItem>
+      <MenuItem onClick={() => router.push('/')}>Home</MenuItem>
+      {isLoggedIn ? (
+        <>
+          <MenuItem onClick={() => router.push('/profile/[id]')}>My Profile</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </>
+      ) : (
+        <MenuItem onClick={() => router.push('/login')}>Login</MenuItem>
+      )}
       <MenuItem onClick={() => router.push('/register')}>Register</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" onClick={() => router.push('/')}>
           <Image src="/logo.png" alt="Logo" width={100} height={50} /> {/* Replace with your logo */}
         </Box>
         <div style={{ flexGrow: 1 }} />
-        {isLoggedIn ? (
-          <Typography variant="h6" color="inherit">
-            Hi, {username}
-          </Typography>
-        ) : (
-          <Button color="inherit" onClick={() => router.push('/login')}>
-            Login
-          </Button>
-        )}
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <Select
+            labelId="language-select-label"
+            value={language}
+            onChange={handleLanguageChange}
+            style={{ color: 'white' }}
+          >
+            <MenuItem value="en">English</MenuItem>
+            <MenuItem value="ml">മലയാളം</MenuItem>
+          </Select>
+        </FormControl>
         {isMobile ? (
           <IconButton edge="end" color="inherit" onClick={handleMobileMenuClick}>
             <MenuIcon />
           </IconButton>
         ) : (
-          <Button color="inherit" onClick={handleMenuClick}>
-            Menu
-          </Button>
+          <IconButton edge="end" color="inherit" onClick={handleMenuClick}>
+            <PersonIcon /> {/* Person icon for profile and logout */}
+          </IconButton>
         )}
       </Toolbar>
       {renderMenu}
