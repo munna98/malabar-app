@@ -1,5 +1,7 @@
-import React from 'react';
-import { Card, CardContent, Grid, Typography, IconButton, Collapse, Button } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Card, CardContent, Grid, Typography, IconButton, Collapse, Button, useMediaQuery, useTheme
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import {
@@ -15,13 +17,31 @@ import {
   DateRange as PartnerAgeIcon,
   Phone as MobileIcon
 } from '@mui/icons-material';
-import { generateAvatar } from '../utils/avatar';
+import { generateAvatar } from '../../utils/avatar';
+import { useRouter } from 'next/router';
+import LoginPromptDialog from '../LoginPromptDialog';
 
-const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
+const UserCard = ({ user, isExpanded, onExpand, isRegistered, isLoggedIn }) => {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const [openDialog, setOpenDialog] = useState(false);
+  const router = useRouter();
+
   const handleRequestMobile = () => {
-    // Implement the logic for requesting mobile number
-    console.log('Requesting mobile number for user:', user.profileId);
-    // You might want to open a modal or navigate to a registration page here
+    if (!isLoggedIn) {
+      setOpenDialog(true);
+    } else {
+      // Implement the logic for requesting mobile number if logged in
+      console.log('Requesting mobile number for user:', user.profileId);
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleLoginRedirect = () => {
+    router.push('/login');
   };
 
   return (
@@ -44,19 +64,15 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
         }}
       >
         <Grid container alignItems="center" spacing={2}>
-          <Grid item xs={9} sm={10}>
-            <Grid container alignItems="center" spacing={6}>
-              <Grid item xs={3} sm={2} md={1}>
-                {generateAvatar(user.name, 60)}
-              </Grid>
-              <Grid item xs={9} sm={10} md={11} >
-                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.role}</Typography>
-                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>Age: {user.age}</Typography>
-                <Typography variant="body2" style={{ fontSize: '0.75rem' }}>District: {user.district}</Typography>
-              </Grid>
-            </Grid>
+          <Grid item xs={3}>
+            {generateAvatar(user.name, 60)}
           </Grid>
-          <Grid item xs={3} sm={2}>
+          <Grid item xs={6}>
+            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.role}</Typography>
+            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>Age: {user.age}</Typography>
+            <Typography variant="body2" style={{ fontSize: '0.75rem' }}>District: {user.district}</Typography>
+          </Grid>
+          <Grid item xs={3}>
             <div style={{
               display: 'flex',
               flexDirection: 'column',
@@ -66,7 +82,8 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
             }}>
               <Typography variant="body2" style={{ fontSize: '0.75rem' }}>ID: {user.profileId}</Typography>
               <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{user.date}</Typography>
-              <IconButton 
+              {!isLargeScreen &&
+                <IconButton 
                 onClick={onExpand} 
                 aria-expanded={isExpanded} 
                 style={{ 
@@ -77,11 +94,12 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
               >
                 {isExpanded ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
               </IconButton>
+              }
             </div>
           </Grid>
         </Grid>
       </CardContent>
-      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+      <Collapse in={isExpanded || isLargeScreen} timeout="auto" unmountOnExit={!isLargeScreen}>
         <CardContent
           style={{
             backgroundColor: '#fff',
@@ -93,62 +111,62 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
           }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <SpiritIcon fontSize="small" style={{ marginRight: '4px' }} /> Spirit: {user.spirit}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <MarriageIcon fontSize="small" style={{ marginRight: '4px' }} /> First Marriage: {user.firstMarriage}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <EducationIcon fontSize="small" style={{ marginRight: '4px' }} /> Education: {user.education}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <EducationIcon fontSize="small" style={{ marginRight: '4px' }} /> Madrasa Education: {user.madrasaEducation}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <JobIcon fontSize="small" style={{ marginRight: '4px' }} /> Job: {user.job}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <SkinColorIcon fontSize="small" style={{ marginRight: '4px' }} /> Skin Color: {user.skinColor}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <HeightIcon fontSize="small" style={{ marginRight: '4px' }} /> Height: {user.height}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <BodyTypeIcon fontSize="small" style={{ marginRight: '4px' }} /> Body Type: {user.bodyType}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <PlaceIcon fontSize="small" style={{ marginRight: '4px' }} /> Place: {user.place}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <PartnerDistrictIcon fontSize="small" style={{ marginRight: '4px' }} /> Partner District: {user.partnerDistrict}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <PartnerAgeIcon fontSize="small" style={{ marginRight: '4px' }} /> Partner Age: {user.partnerAgeFrom} - {user.partnerAgeTo}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="body2" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center' }}>
                 <MobileIcon fontSize="small" style={{ marginRight: '4px' }} />
                 {isRegistered ? (
@@ -190,6 +208,11 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered }) => {
           </Grid>
         </CardContent>
       </Collapse>
+      <LoginPromptDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        onLoginRedirect={handleLoginRedirect}
+      />
     </Card>
   );
 };
