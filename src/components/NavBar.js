@@ -1,6 +1,6 @@
 // src/components/NavBar.js
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button, useMediaQuery, Typography, Box, Select, FormControl } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button, useMediaQuery, Typography, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 import { useTheme } from '@mui/material/styles';
@@ -34,8 +34,9 @@ const NavBar = ({ isLoggedIn, username }) => {
     handleMenuClose();
   };
 
-  const handleLanguageChange = (event) => {
-    setLanguage(event.target.value);
+  const toggleLanguage = () => {
+    setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'ml' : 'en'));
+    // Add your language change logic here (e.g., update context or state, reload page, etc.)
   };
 
   const renderMenu = (
@@ -93,17 +94,9 @@ const NavBar = ({ isLoggedIn, username }) => {
           <Image src="/logo.png" alt="Logo" width={100} height={50} /> {/* Replace with your logo */}
         </Box>
         <div style={{ flexGrow: 1 }} />
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <Select
-            labelId="language-select-label"
-            value={language}
-            onChange={handleLanguageChange}
-            style={{ color: 'white' }}
-          >
-            <MenuItem value="en">English</MenuItem>
-            <MenuItem value="ml">മലയാളം</MenuItem>
-          </Select>
-        </FormControl>
+        <Button color="inherit" onClick={toggleLanguage}>
+          {language === 'en' ? 'മലയാളം' : 'English'}
+        </Button>
         {isMobile ? (
           <IconButton edge="end" color="inherit" onClick={handleMobileMenuClick}>
             <MenuIcon />
