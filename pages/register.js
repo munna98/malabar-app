@@ -1,63 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   Container,
   Typography,
+  TextField,
   Box,
-  Stepper,
-  Step,
-  StepLabel,
+  FormControl,
+  FormLabel,
+  ToggleButton,
+  ToggleButtonGroup,
   useMediaQuery,
   useTheme,
-  IconButton
-} from '@mui/material';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import NavBar from '../src/components/NavBar';
-import BasicInfoStep from '@/components/register/BasicInfoStep';
-import MoreInfoStep from '@/components/register/MoreInfoStep';
-import PartnerPreferenceStep from '@/components/register/PartnerPreferenceStep';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
+import { useRouter } from "next/router";
+import NavBar from "../src/components/NavBar";
+import MuiPhoneNumber from "mui-phone-number";
 
 const Register = () => {
-  const [activeStep, setActiveStep] = useState(0);
   const [formValues, setFormValues] = useState({
-    role: '',
-    country: '',
-    mobile: '',
-    name: '',
-    spirit: '',
-    firstMarriage: '',
-    age: '',
-    education: '',
-    madrasaEducation: '',
-    job: '',
-    skinColor: '',
-    height: '',
-    bodyType: '',
-    district: '',
-    place: '',
-    partnerDistrict: '',
-    partnerAgeFrom: '',
-    partnerAgeTo: '',
-    additionalInfo1: '',
-    additionalInfo2: '',
-    additionalInfo3: '',
+    lookingfor: "",
+    mobile: "",
+    name: "",
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [userId, setUserId] = useState(""); // Example user ID
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const router = useRouter();
-
-  const steps = ['Basic Info', 'More Info', 'Partner Preference'];
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,29 +43,16 @@ const Register = () => {
   };
 
   const handleRegister = () => {
+    // Simulate registration process
     console.log(formValues);
-    // Add your registration logic here
-    router.push('/login');
+    // Example registration logic
+    setUserId("123456"); // Set the user ID (this should come from your registration logic)
+    setIsDialogOpen(true);
   };
 
-  const getStepContent = (stepIndex) => {
-    switch (stepIndex) {
-      case 0:
-        return <BasicInfoStep formValues={formValues} handleChange={handleChange} handlePhoneChange={handlePhoneChange} isSmallScreen={isSmallScreen} />;
-      case 1:
-        return <MoreInfoStep formValues={formValues} handleChange={handleChange} />;
-      case 2:
-        return <PartnerPreferenceStep formValues={formValues} handleChange={handleChange} />;
-      default:
-        return 'Unknown step';
-    }
-  };
-
-  const getButtonAlignment = () => {
-    if (activeStep === 0) {
-      return 'flex-end';
-    }
-    return 'space-between';
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    router.push("/login");
   };
 
   return (
@@ -100,107 +61,145 @@ const Register = () => {
       <Container
         maxWidth={false}
         disableGutters
-        sx={{
-          minHeight: 'calc(100vh - 64px)', // Adjust height to account for the NavBar height
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0',
-          margin: '0',
-          overflowY: 'auto', // Add vertical scroll to the page
+        style={{
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "0",
+          margin: "0",
         }}
       >
         <Box
           display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          padding={isSmallScreen ? '16px' : '32px'}
-          margin={isSmallScreen && '16px'}
-          sx={{
-            bgcolor: "#ECC290",
-            borderRadius: '12px',
-            // boxShadow: '10px 10px 12px 12px rgba(0, 0, 0, 0.2)',
-            maxWidth: '1100px', // Ensure the card fits well within the page
-            width: '100%',
-            textAlign: 'center',
-          }}
+          flexDirection={isSmallScreen ? "column" : "row"}
+          width="100%"
+          height="100%"
         >
-          <Typography
-            variant="h4"
-            gutterBottom
-            style={{
-              color: "#143326",
-              fontFamily: 'Cinzel Decorative, serif',
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            padding="32px"
+            sx={{
+              bgcolor: "#143326",
+              width: isSmallScreen ? "100%" : "50%",
+              height: isSmallScreen ? "50%" : "100%",
+              textAlign: "center",
+              paddingTop: isSmallScreen ? "24px" : "32px",
             }}
           >
-            Register
-          </Typography>
-          <Stepper activeStep={activeStep} alternativeLabel style={{ width: '100%', marginBottom: '24px' }}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          {getStepContent(activeStep)}
-          <Box mt={2} display="flex" justifyContent={getButtonAlignment()} width="100%">
-            {activeStep > 0 && (
-              <IconButton
-                onClick={handleBack}
-                style={{
-                  color: "#143326",
-                  marginRight: '8px',
-                }}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-            )}
-            {activeStep < steps.length - 1 ? (
-              <IconButton
-                variant="contained"
-                onClick={handleNext}
-                style={{
-                  backgroundColor: "#143326",
-                  color: "#ECC290",
-                }}
-              >
-                <ArrowForwardIcon />
-              </IconButton>
-            ) : (
-              activeStep === steps.length - 1 && (
-                <IconButton
-                  variant="contained"
-                  onClick={handleRegister}
-                  style={{
-                    backgroundColor: "#143326",
-                    color: "#ECC290",
-                  }}
-                >
-                  <ArrowForwardIcon />
-                </IconButton>
-              )
-            )}
-          </Box>
-          <Box display="flex" flexDirection="row" alignItems="center">
-            {activeStep === 0 && (
-              <Typography
-              variant="body2"
+            <Box mt={isSmallScreen ? 2 : 4}>
+              <img src="/logo.png" alt="Logo" style={{ maxWidth: "150px" }} />
+            </Box>
+            <Typography
+              variant="h6"
+              gutterBottom
               style={{
-                marginTop: '16px',
-                color: '#143326',
-                cursor: 'pointer',
-                textDecoration: 'underline',
-                fontSize: '1rem'
-                // fontSize: isSmallScreen ? '0.75rem' : '1rem'
+                color: "#ECC290",
+                fontSize: isSmallScreen ? "0.65rem" : "1.25rem",
+                marginTop: isSmallScreen ? "8px" : "16px",
               }}
+            >
+              Welcome to the most trusted exclusive Muslim matrimony in Kerala
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width={isSmallScreen ? "100%" : "50%"}
+            height={isSmallScreen ? "50%" : "100%"}
+            p={2}
+            sx={{
+              maxWidth: "500px",
+              mx: isSmallScreen ? "0" : "auto",
+            }}
+          >
+            <FormControl component="fieldset" fullWidth margin="normal">
+              <FormLabel component="legend" sx={{ textAlign: "left" }}>
+                I'm Looking for a
+              </FormLabel>
+              <ToggleButtonGroup
+                value={formValues.lookingfor}
+                exclusive
+                onChange={(event, newValue) => {
+                  if (newValue !== null) {
+                    handleChange({
+                      target: { name: "lookingfor", value: newValue },
+                    });
+                  }
+                }}
+                fullWidth
+              >
+                <ToggleButton value="bride" fullWidth>
+                  Bride
+                </ToggleButton>
+                <ToggleButton value="groom" fullWidth>
+                  Groom
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </FormControl>
+
+            <TextField
+              label="Name"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="name"
+              value={formValues.name}
+              onChange={handleChange}
+              inputProps={{ style: { textAlign: "left" } }}
+            />
+
+            <FormControl fullWidth margin="normal">
+              <FormLabel sx={{ textAlign: "left" }}>Mobile</FormLabel>
+              <MuiPhoneNumber
+                defaultCountry={"in"}
+                value={formValues.mobile}
+                onChange={handlePhoneChange}
+                variant="outlined"
+                fullWidth
+                inputProps={{ style: { textAlign: "left" } }}
+              />
+            </FormControl>
+
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 2 }}
               onClick={handleRegister}
             >
-              Already registered? Login here
-            </Typography>
-            )}
+              Register Free
+            </Button>
           </Box>
         </Box>
+
+        <Dialog
+          open={isDialogOpen}
+          onClose={handleCloseDialog}
+          aria-labelledby="registration-success-dialog"
+        >
+          <DialogTitle id="registration-success-dialog">
+            Registration Successful
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Your registration is successful! Your user ID and password have been sent to your registered mobile number.
+            </DialogContentText>
+            <Typography variant="body1" gutterBottom>
+              User ID: {userId}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog} color="primary" variant="contained">
+              Login
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </>
   );

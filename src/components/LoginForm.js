@@ -76,7 +76,7 @@ const LoginForm = () => {
               marginTop: isSmallScreen ? '8px' : '16px', // Adjust margin-top for small screens
             }}
           >
-            Welcome to the most trusted exclusive Muslim matrimony in Kerala
+            Welcome back mate
           </Typography>
           <Typography
             variant="h3"
