@@ -6,11 +6,11 @@ import {
   Container,
   Typography,
   Box,
-  Image,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useRouter } from 'next/router';
+import { Image } from "@mui/icons-material";
 
 const LoginForm = () => {
   const [userId, setUserId] = useState("");
