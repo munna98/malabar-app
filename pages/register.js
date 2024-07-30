@@ -4,6 +4,7 @@ import {
   Container,
   Typography,
   TextField,
+  Image,
   Box,
   FormControl,
   FormLabel,
