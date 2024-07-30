@@ -65,7 +65,7 @@ const LoginForm = () => {
           }}
         >
           <Box mt={isSmallScreen ? 2 : 4}>
-            <img src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} /> {/* Replace with your logo */}
+            <Image src="/logo.png" alt="Logo" style={{ maxWidth: '150px' }} /> {/* Replace with your logo */}
           </Box>
           <Typography
             variant="h6"

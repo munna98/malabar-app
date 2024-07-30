@@ -120,7 +120,7 @@ const Register = () => {
           >
             <FormControl component="fieldset" fullWidth margin="normal">
               <FormLabel component="legend" sx={{ textAlign: "left" }}>
-                I'm Looking for a
+                I am Looking for a
               </FormLabel>
               <ToggleButtonGroup
                 value={formValues.lookingfor}
