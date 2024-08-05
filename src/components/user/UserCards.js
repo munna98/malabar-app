@@ -6,7 +6,6 @@ import UserCard from './UserCard';
 const UserCards = ({ isUserRegistered }) => {
   const [expandedCardId, setExpandedCardId] = useState(null);
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const handleExpandClick = (cardId) => {
     setExpandedCardId(expandedCardId === cardId ? null : cardId);

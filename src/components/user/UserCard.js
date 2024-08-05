@@ -30,10 +30,11 @@ import {
 import { generateAvatar } from "../../utils/avatar";
 import { useRouter } from "next/router";
 import LoginPromptDialog from "../LoginPromptDialog";
+import { useScreenSize } from "@/context/ScreenSizeContext";
+
 
 const UserCard = ({ user, isExpanded, onExpand, isRegistered, isLoggedIn }) => {
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const { isLargeScreen } = useScreenSize();
   const [openDialog, setOpenDialog] = useState(false);
   const router = useRouter();
 
@@ -340,17 +341,14 @@ const UserCard = ({ user, isExpanded, onExpand, isRegistered, isLoggedIn }) => {
         </CardContent>
         <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 16px", backgroundColor: "#fff", borderTop: "1px solid #ccc" }}>
           <Button
-            variant="contained"
-            size="small"
-            onClick={handleRequestMobile}
-            style={{
-              backgroundColor: "#143326",
-              color: "#fff",
-              fontSize: "0.75rem",
-            }}
-          >
-            Request Mobile
-          </Button>
+        onClick={handleRequestMobile}
+        variant="contained"
+        color="primary"
+        
+      >
+        <MobileIcon fontSize="small" style={{ marginRight: "4px" }} />
+        View Mobile
+      </Button>
           <IconButton
             onClick={onExpand}
             aria-expanded={isExpanded}

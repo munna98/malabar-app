@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../src/theme';
 import '../styles/globals.css';
 import { UserProvider } from '../src/context/UserContext';
-import Head from 'next/head';
+import { ScreenSizeProvider } from '../src/context/ScreenSizeContext';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -19,16 +19,12 @@ export default function MyApp(props) {
 
   return (
     <UserProvider>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ScreenSizeProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ScreenSizeProvider>
     </UserProvider>
   );
 }

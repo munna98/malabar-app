@@ -10,7 +10,6 @@ import {
   Box, 
   Typography, 
   useMediaQuery, 
-  Tooltip, 
   IconButton,
 } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -23,6 +22,9 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import CakeIcon from '@mui/icons-material/Cake';
 import HomeIcon from '@mui/icons-material/Home';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 import NavBar from '../../src/components/NavBar';
 import theme from '../../src/theme';
@@ -60,13 +62,23 @@ const Profile = () => {
   };
 
   const InfoItem = ({ icon, label, value, index }) => (
-    <Box display="flex" alignItems="center" mb={2} style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff' }}>
-      <Tooltip title={label}>
-        <IconButton size="small" style={{ marginRight: '12px', color: theme.palette.primary.main }}>
-          {icon}
-        </IconButton>
-      </Tooltip>
-      <Typography variant="body1"><strong>{label}:</strong> {value}</Typography>
+    <Box 
+      display="flex" 
+      alignItems="center" 
+      mb={1} 
+      style={{ 
+        backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff',
+        borderRadius: '8px', 
+        padding: '8px', 
+        transition: 'background-color 0.3s ease-in-out' 
+      }}
+    >
+      <IconButton size="small" style={{ marginRight: '12px', color: theme.palette.primary.main }}>
+        {icon}
+      </IconButton>
+      <Typography variant="body1" style={{ fontWeight: 500 }}>
+        <strong>{label}:</strong> {value}
+      </Typography>
     </Box>
   );
 
@@ -79,9 +91,9 @@ const Profile = () => {
     { icon: <CakeIcon />, label: 'Age', value: userData.age },
     { icon: <ColorLensIcon />, label: 'Skin Color', value: userData.skinColor },
     { icon: <HeightIcon />, label: 'Height', value: userData.height },
-    { icon: <FitnessCenterIcon />, label: 'Body Type', value: userData.bodyType },
+    { icon: <AccessibilityIcon />, label: 'Body Type', value: userData.bodyType },
     { icon: <HomeIcon />, label: 'District', value: userData.district },
-    { icon: <SchoolIcon />, label: 'Madrasa Education', value: userData.madrasaEducation },
+    { icon: <MenuBookIcon />, label: 'Madrasa Education', value: userData.madrasaEducation },
   ];
 
   const partnerInfoItems = [
@@ -109,16 +121,16 @@ const Profile = () => {
               <Grid item xs={12} md={4} style={{ backgroundColor: theme.palette.primary.main, color: theme.palette.secondary.main, padding: isSmallScreen ? '24px' : '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 {/* Use the generateAvatar function to generate the avatar */}
                 {generateAvatar(userData.name, 120)}
-                <Typography variant="h3" style={{ marginBottom: '8px' }}>{userData.name}</Typography>
-                <Typography variant="h6" style={{ textTransform: 'capitalize', marginBottom: '8px' }}>{userData.role}</Typography>
-                <Typography variant="body1"><strong>Profile ID:</strong> {userData.profileid}</Typography>
+                <Typography variant="h3" style={{ marginBottom: '8px', fontWeight: 700 }}>{userData.name}</Typography>
+                <Typography variant="h6" style={{ textTransform: 'capitalize', marginBottom: '8px', fontWeight: 500 }}>{userData.role}</Typography>
+                <Typography variant="body1" style={{ fontWeight: 500 }}><strong>Profile ID:</strong> {userData.profileid}</Typography>
               </Grid>
               <Grid item xs={12} md={8}>
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                       <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Personal Information</Typography>
+                        <Typography variant="h5" style={{ marginBottom: '16px', fontWeight: 600 }}>Personal Information</Typography>
                         {personalInfoItems.map((item, index) => (
                           <InfoItem key={item.label} icon={item.icon} label={item.label} value={item.value} index={index} />
                         ))}
@@ -126,17 +138,29 @@ const Profile = () => {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Partner Preference</Typography>
+                        <Typography variant="h5" style={{ marginBottom: '16px', fontWeight: 600 }}>Partner Preference</Typography>
                         {partnerInfoItems.map((item, index) => (
                           <InfoItem key={item.label} icon={item.icon} label={item.label} value={item.value} index={index} />
                         ))}
                       </Card>
                       <Card style={{ padding: '16px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', marginTop: '22px' }}>
-                        <Typography variant="h5" style={{ marginBottom: '16px' }}>Additional Information</Typography>
+                        <Typography variant="h5" style={{ marginBottom: '16px', fontWeight: 600 }}>Additional Information</Typography>
                         {additionalInfoItems.map((info, index) => (
-                          <Typography key={index} variant="body1" style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff', padding: '8px' }}>
-                            {info}
-                          </Typography>
+                          <Box 
+                            key={index} 
+                            display="flex" 
+                            alignItems="center" 
+                            mb={1} 
+                            style={{ 
+                              backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff', 
+                              borderRadius: '8px',
+                              padding: '8px', 
+                              transition: 'background-color 0.3s ease-in-out' 
+                            }}
+                          >
+                            <AttachFileIcon style={{ marginRight: '12px', color: theme.palette.primary.main }} />
+                            <Typography variant="body1">{info}</Typography>
+                          </Box>
                         ))}
                       </Card>
                     </Grid>

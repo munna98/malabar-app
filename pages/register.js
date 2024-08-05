@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import {
   Button,
   Container,
@@ -9,50 +11,47 @@ import {
   FormLabel,
   ToggleButton,
   ToggleButtonGroup,
-  useMediaQuery,
-  useTheme,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material";
-import { useRouter } from "next/router";
-import NavBar from "../src/components/NavBar";
-import MuiPhoneNumber from "mui-phone-number";
+} from '@mui/material';
+import { useRouter } from 'next/router';
+import NavBar from '../src/components/NavBar';
+import MuiPhoneNumber from 'mui-phone-number';
+import { useScreenSize } from '../src/context/ScreenSizeContext';
+import Image from 'next/image';
 
 const Register = () => {
-  const [formValues, setFormValues] = useState({
-    lookingfor: "",
-    mobile: "",
-    name: "",
-  });
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [userId, setUserId] = useState(""); // Example user ID
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [userId, setUserId] = React.useState('');
+  const { isSmallScreen } = useScreenSize();
   const router = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handlePhoneChange = (value) => {
-    setFormValues({ ...formValues, mobile: value });
-  };
-
-  const handleRegister = () => {
-    // Simulate registration process
-    console.log(formValues);
-    // Example registration logic
-    setUserId("123456"); // Set the user ID (this should come from your registration logic)
-    setIsDialogOpen(true);
-  };
+  const formik = useFormik({
+    initialValues: {
+      lookingfor: '',
+      mobile: '',
+      name: '',
+    },
+    validationSchema: Yup.object({
+      lookingfor: Yup.string().required('Please select an option.'),
+      name: Yup.string().required('Name is required.'),
+      mobile: Yup.string()
+        .required('Mobile number is required.')
+        // .matches(/^\+91 \d{5}-\d{5}$/, 'Mobile number must be exactly 10 digits.'),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+      setUserId('123456'); // Simulate user ID assignment
+      setIsDialogOpen(true);
+    },
+  });
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
-    router.push("/login");
+    router.push('/login');
   };
 
   return (
@@ -62,17 +61,17 @@ const Register = () => {
         maxWidth={false}
         disableGutters
         style={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "0",
-          margin: "0",
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '0',
+          margin: '0',
         }}
       >
         <Box
           display="flex"
-          flexDirection={isSmallScreen ? "column" : "row"}
+          flexDirection={isSmallScreen ? 'column' : 'row'}
           width="100%"
           height="100%"
         >
@@ -83,23 +82,30 @@ const Register = () => {
             justifyContent="center"
             padding="32px"
             sx={{
-              bgcolor: "#143326",
-              width: isSmallScreen ? "100%" : "50%",
-              height: isSmallScreen ? "50%" : "100%",
-              textAlign: "center",
-              paddingTop: isSmallScreen ? "24px" : "32px",
+              bgcolor: '#143326',
+              width: '100%',
+              height: '100%',
+              textAlign: 'center',
+              display: 'flex',
             }}
           >
             <Box mt={isSmallScreen ? 2 : 4}>
-              <img src="/logo.png" alt="Logo" style={{ maxWidth: "150px" }} />
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={150}
+                height={75}
+                priority
+              />
             </Box>
             <Typography
               variant="h6"
               gutterBottom
-              style={{
-                color: "#ECC290",
-                fontSize: isSmallScreen ? "0.65rem" : "1.25rem",
-                marginTop: isSmallScreen ? "8px" : "16px",
+              sx={{
+                color: '#ECC290',
+                fontSize: { xs: '0.65rem', sm: '1.25rem' },
+                mt: { xs: 1, sm: 2 },
+                textAlign: { xs: 'center', sm: 'center' },
               }}
             >
               Welcome to the most trusted exclusive Muslim matrimony in Kerala
@@ -110,71 +116,101 @@ const Register = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width={isSmallScreen ? "100%" : "50%"}
-            height={isSmallScreen ? "50%" : "100%"}
+            width="100%"
+            height="100%"
             p={2}
             sx={{
-              maxWidth: "500px",
-              mx: isSmallScreen ? "0" : "auto",
+              maxWidth: '500px',
+              mx: 'auto',
             }}
           >
-            <FormControl component="fieldset" fullWidth margin="normal">
-              <FormLabel component="legend" sx={{ textAlign: "left" }}>
-                I am Looking for a
-              </FormLabel>
-              <ToggleButtonGroup
-                value={formValues.lookingfor}
-                exclusive
-                onChange={(event, newValue) => {
-                  if (newValue !== null) {
-                    handleChange({
-                      target: { name: "lookingfor", value: newValue },
-                    });
-                  }
-                }}
-                fullWidth
-              >
-                <ToggleButton value="bride" fullWidth>
-                  Bride
-                </ToggleButton>
-                <ToggleButton value="groom" fullWidth>
-                  Groom
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </FormControl>
+            <form onSubmit={formik.handleSubmit}>
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend" sx={{ textAlign: 'left' }}>
+                  I am Looking for a
+                </FormLabel>
+                <ToggleButtonGroup
+                  name="lookingfor"
+                  value={formik.values.lookingfor}
+                  exclusive
+                  onChange={(event, newValue) => {
+                    if (newValue !== null) {
+                      formik.setFieldValue('lookingfor', newValue);
+                    }
+                  }}
+                  fullWidth
+                >
+                  <ToggleButton value="bride" fullWidth>
+                    Bride
+                  </ToggleButton>
+                  <ToggleButton value="groom" fullWidth>
+                    Groom
+                  </ToggleButton>
+                </ToggleButtonGroup>
+                {formik.touched.lookingfor && formik.errors.lookingfor && (
+                  <Typography color="error" variant="body2" align="left">
+                    {formik.errors.lookingfor}
+                  </Typography>
+                )}
+              </FormControl>
 
-            <TextField
-              label="Name"
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="name"
-              value={formValues.name}
-              onChange={handleChange}
-              inputProps={{ style: { textAlign: "left" } }}
-            />
-
-            <FormControl fullWidth margin="normal">
-              <FormLabel sx={{ textAlign: "left" }}>Mobile</FormLabel>
-              <MuiPhoneNumber
-                defaultCountry={"in"}
-                value={formValues.mobile}
-                onChange={handlePhoneChange}
+              <TextField
+                label="Name"
                 variant="outlined"
+                margin="normal"
                 fullWidth
-                inputProps={{ style: { textAlign: "left" } }}
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+                inputProps={{ style: { textAlign: 'left' } }}
               />
-            </FormControl>
 
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              sx={{ mt: 2 }}
-              onClick={handleRegister}
+              <FormControl fullWidth margin="normal">
+                <FormLabel sx={{ textAlign: 'left' }}>Mobile</FormLabel>
+                <MuiPhoneNumber
+                  defaultCountry={'in'}
+                  disableAreaCodes='true'
+                  countryCodeEditable='false'
+                  name="mobile"
+                  value={formik.values.mobile}
+                  onChange={(value) => formik.setFieldValue('mobile', value)}
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{ style: { textAlign: 'left' } }}
+                />
+                {formik.touched.mobile && formik.errors.mobile && (
+                  <Typography color="error" variant="body2" align="left">
+                    {formik.errors.mobile}
+                  </Typography>
+                )}
+              </FormControl>
+
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ mt: 2 }}
+              >
+                Register Free
+              </Button>
+            </form>
+            <Typography
+              variant="body2"
+              style={{
+                marginTop: '16px',
+                color: '#143326',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                fontSize: '1rem',
+              }}
+              onClick={() => router.push('/login')}
             >
-              Register Free
-            </Button>
+              Already registered? Login here
+            </Typography>
           </Box>
         </Box>
 
