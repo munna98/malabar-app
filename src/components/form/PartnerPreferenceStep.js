@@ -30,39 +30,40 @@ const districts = [
   "Idukki"
 ];
 
-const PartnerPreferenceStep = ({ formValues, handleChange }) => {
+const PartnerPreferenceStep = ({ formik }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleDistrictChange = (event) => {
     const { value } = event.target;
+    const { setFieldValue } = formik;
 
     if (value.includes("All")) {
-      const isAllSelected = formValues.partnerDistrict.length === districts.length;
+      const isAllSelected = formik.values.partnerDistrict.length === districts.length;
       if (isAllSelected) {
-        handleChange({ target: { name: 'partnerDistrict', value: [] } });
+        setFieldValue('partnerDistrict', []);
       } else {
-        handleChange({ target: { name: 'partnerDistrict', value: districts } });
+        setFieldValue('partnerDistrict', districts);
       }
     } else {
-      handleChange({ target: { name: 'partnerDistrict', value } });
+      setFieldValue('partnerDistrict', value);
     }
   };
 
-  const isAllSelected = formValues.partnerDistrict.length === districts.length;
+  const isAllSelected = (formik.values.partnerDistrict || []).length === districts.length;
 
   const handleAgeRangeChange = (event, newValue) => {
-    handleChange({ target: { name: 'partnerAgeRange', value: newValue } });
+    formik.setFieldValue('partnerAgeRange', newValue);
   };
 
   const handleAgeFromChange = (event) => {
-    const newValue = [parseInt(event.target.value, 10), formValues.partnerAgeRange[1]];
-    handleChange({ target: { name: 'partnerAgeRange', value: newValue } });
+    const newValue = [parseInt(event.target.value, 10), formik.values.partnerAgeRange[1]];
+    formik.setFieldValue('partnerAgeRange', newValue);
   };
 
   const handleAgeToChange = (event) => {
-    const newValue = [formValues.partnerAgeRange[0], parseInt(event.target.value, 10)];
-    handleChange({ target: { name: 'partnerAgeRange', value: newValue } });
+    const newValue = [formik.values.partnerAgeRange[0], parseInt(event.target.value, 10)];
+    formik.setFieldValue('partnerAgeRange', newValue);
   };
 
   return (
@@ -81,7 +82,7 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
             label="Partner&apos;s District"
             name="partnerDistrict"
             multiple
-            value={formValues.partnerDistrict || []}
+            value={formik.values.partnerDistrict || []}
             onChange={handleDistrictChange}
             renderValue={(selected) => (
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -106,7 +107,7 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
               <MenuItem
                 key={district}
                 value={district}
-                disabled={isAllSelected && formValues.partnerDistrict.includes(district)}
+                disabled={isAllSelected && formik.values.partnerDistrict.includes(district)}
               >
                 {district}
               </MenuItem>
@@ -119,7 +120,7 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
             Partner&apos;s Age Range
           </Typography>
           <Slider
-            value={formValues.partnerAgeRange || [18, 30]}
+            value={formik.values.partnerAgeRange || [18, 30]}
             onChange={handleAgeRangeChange}
             valueLabelDisplay="auto"
             min={18}
@@ -132,14 +133,14 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
             <TextField
               label="From"
               type="number"
-              value={formValues.partnerAgeRange ? formValues.partnerAgeRange[0] : 18}
+              value={formik.values.partnerAgeRange ? formik.values.partnerAgeRange[0] : 18}
               onChange={handleAgeFromChange}
               inputProps={{ min: 18, max: 80 }}
             />
             <TextField
               label="To"
               type="number"
-              value={formValues.partnerAgeRange ? formValues.partnerAgeRange[1] : 30}
+              value={formik.values.partnerAgeRange ? formik.values.partnerAgeRange[1] : 30}
               onChange={handleAgeToChange}
               inputProps={{ min: 18, max: 80 }}
             />
@@ -152,8 +153,8 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
           margin="normal"
           fullWidth
           name="additionalInfo1"
-          value={formValues.additionalInfo1}
-          onChange={handleChange}
+          value={formik.values.additionalInfo1}
+          onChange={formik.handleChange}
           inputProps={{ style: { textAlign: 'left' } }}
         />
         <TextField
@@ -162,8 +163,8 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
           margin="normal"
           fullWidth
           name="additionalInfo2"
-          value={formValues.additionalInfo2}
-          onChange={handleChange}
+          value={formik.values.additionalInfo2}
+          onChange={formik.handleChange}
           inputProps={{ style: { textAlign: 'left' } }}
         />
         <TextField
@@ -172,8 +173,8 @@ const PartnerPreferenceStep = ({ formValues, handleChange }) => {
           margin="normal"
           fullWidth
           name="additionalInfo3"
-          value={formValues.additionalInfo3}
-          onChange={handleChange}
+          value={formik.values.additionalInfo3}
+          onChange={formik.handleChange}
           inputProps={{ style: { textAlign: 'left' } }}
         />
       </Box>

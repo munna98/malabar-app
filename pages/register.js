@@ -38,9 +38,7 @@ const Register = () => {
     validationSchema: Yup.object({
       lookingfor: Yup.string().required('Please select an option.'),
       name: Yup.string().required('Name is required.'),
-      mobile: Yup.string()
-        .required('Mobile number is required.')
-        // .matches(/^\+91 \d{5}-\d{5}$/, 'Mobile number must be exactly 10 digits.'),
+      mobile: Yup.string().required('Mobile number is required.'),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -60,13 +58,13 @@ const Register = () => {
       <Container
         maxWidth={false}
         disableGutters
-        style={{
+        sx={{
           height: '100vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '0',
-          margin: '0',
+          padding: 0,
+          margin: 0,
         }}
       >
         <Box
@@ -80,13 +78,12 @@ const Register = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            padding="32px"
             sx={{
               bgcolor: '#143326',
               width: '100%',
               height: '100%',
               textAlign: 'center',
-              display: 'flex',
+              padding: '32px',
             }}
           >
             <Box mt={isSmallScreen ? 2 : 4}>
@@ -105,7 +102,7 @@ const Register = () => {
                 color: '#ECC290',
                 fontSize: { xs: '0.65rem', sm: '1.25rem' },
                 mt: { xs: 1, sm: 2 },
-                textAlign: { xs: 'center', sm: 'center' },
+                textAlign: 'center',
               }}
             >
               Welcome to the most trusted exclusive Muslim matrimony in Kerala
@@ -116,12 +113,12 @@ const Register = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width="100%"
-            height="100%"
-            p={2}
             sx={{
+              width: '100%',
+              height: '100%',
               maxWidth: '500px',
               mx: 'auto',
+              p: 2,
             }}
           >
             <form onSubmit={formik.handleSubmit}>
@@ -172,8 +169,8 @@ const Register = () => {
                 <FormLabel sx={{ textAlign: 'left' }}>Mobile</FormLabel>
                 <MuiPhoneNumber
                   defaultCountry={'in'}
-                  disableAreaCodes='true'
-                  countryCodeEditable='false'
+                  disableAreaCodes
+                  countryCodeEditable={false}
                   name="mobile"
                   value={formik.values.mobile}
                   onChange={(value) => formik.setFieldValue('mobile', value)}
@@ -200,8 +197,8 @@ const Register = () => {
             </form>
             <Typography
               variant="body2"
-              style={{
-                marginTop: '16px',
+              sx={{
+                mt: 2,
                 color: '#143326',
                 cursor: 'pointer',
                 textDecoration: 'underline',
