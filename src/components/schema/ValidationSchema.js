@@ -12,8 +12,8 @@ const ValidationSchema = Yup.object().shape({
   place: Yup.string().required('Place is required'),
   firstMarriage: Yup.boolean().required('First marriage is required'),
   previousMarriageDetails: Yup.string().when('firstMarriage', {
-    is: false, // condition
-    then: Yup.string().required('Previous marriage details are required')
+    is: 'no', // condition
+    then: Yup.string().notRequired(), // Optional field when first marriage is false
   }),
   additionalInfo1: Yup.string(),
   additionalInfo2: Yup.string(),
@@ -21,4 +21,5 @@ const ValidationSchema = Yup.object().shape({
   partnerDistrict: Yup.array().of(Yup.string()),
   partnerAgeRange: Yup.array().of(Yup.number().min(18).max(80)).length(2)
 });
+
 export default ValidationSchema;

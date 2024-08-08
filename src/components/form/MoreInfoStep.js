@@ -8,6 +8,11 @@ import {
   MenuItem,
   useMediaQuery,
   useTheme,
+  FormControlLabel,
+  FormLabel,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography
 } from '@mui/material';
 
 const districts = [
@@ -30,6 +35,16 @@ const districts = [
 const MoreInfoStep = ({ formik }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleFirstMarriageChange = (event, newValue) => {
+    if (newValue !== null) {
+      const isFirstMarriage = newValue === 'yes';
+      formik.setFieldValue('firstMarriage', isFirstMarriage);
+      if (!isFirstMarriage) {
+        formik.setFieldValue('previousMarriageDetails', '');
+      }
+    }
+  };
 
   return (
     <Box
@@ -94,6 +109,41 @@ const MoreInfoStep = ({ formik }) => {
           onChange={formik.handleChange}
           inputProps={{ style: { textAlign: 'left' } }}
         />
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormLabel component="legend" sx={{ textAlign: 'left' }}>
+            First Marriage
+          </FormLabel>
+          <ToggleButtonGroup
+            name="firstMarriage"
+            value={formik.values.firstMarriage ? 'yes' : 'no'}
+            exclusive
+            onChange={handleFirstMarriageChange}
+            fullWidth
+          >
+            <ToggleButton value="yes" fullWidth>
+              Yes
+            </ToggleButton>
+            <ToggleButton value="no" fullWidth>
+              No
+            </ToggleButton>
+          </ToggleButtonGroup>
+          {formik.touched.firstMarriage && formik.errors.firstMarriage && (
+            <Typography color="error" variant="body2" align="left">
+              {formik.errors.firstMarriage}
+            </Typography>
+          )}
+        </FormControl>
+        {!formik.values.firstMarriage && (
+          <TextField
+            label="Note if any"
+            variant="outlined"
+            fullWidth
+            name="previousMarriageDetails"
+            value={formik.values.previousMarriageDetails}
+            onChange={formik.handleChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+          />
+        )}
       </Box>
     </Box>
   );

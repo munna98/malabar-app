@@ -127,7 +127,7 @@ const FormComponent = () => {
             onSubmit={handleSubmitForm}
           >
             {formik => (
-              <Form>
+              <Form style={{ width: '100%', maxWidth: '600px' }}> {/* Set fixed width */}
                 <Stepper activeStep={activeStep} alternativeLabel style={{ width: '100%', marginBottom: '24px' }}>
                   {steps.map((label) => (
                     <Step key={label}>
@@ -150,7 +150,6 @@ const FormComponent = () => {
                   )}
                   {activeStep < steps.length - 1 ? (
                     <IconButton
-                      variant="contained"
                       onClick={handleNext}
                       style={{
                         backgroundColor: "#143326",
@@ -160,18 +159,16 @@ const FormComponent = () => {
                       <ArrowForwardIcon />
                     </IconButton>
                   ) : (
-                    activeStep === steps.length - 1 && (
-                      <IconButton
-                        variant="contained"
-                        type="submit"
-                        style={{
-                          backgroundColor: "#143326",
-                          color: "#ECC290",
-                        }}
-                      >
-                        <ArrowForwardIcon />
-                      </IconButton>
-                    )
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      style={{
+                        backgroundColor: "#143326",
+                        color: "#ECC290",
+                      }}
+                    >
+                      Submit
+                    </Button>
                   )}
                 </Box>
               </Form>
