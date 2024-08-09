@@ -115,13 +115,13 @@ const FormComponent = () => {
               job: '',
               district: '',
               place: '',
-              firstMarriage: '',
+              firstMarriage: true,
               previousMarriageDetails: '',
               additionalInfo1: '',
               additionalInfo2: '',
               additionalInfo3: '',
               partnerDistrict: [],
-              partnerAgeRange: [18, 80]
+              partnerAgeRange: [18, 30]
             }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmitForm}
