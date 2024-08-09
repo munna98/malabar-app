@@ -148,7 +148,7 @@ const RegisterForm = () => {
             <form onSubmit={formik.handleSubmit}>
               <FormControl component="fieldset" fullWidth margin="normal">
                 <FormLabel component="legend" sx={{ textAlign: "left" }}>
-                  I'm Looking for a
+                  I&apos;m Looking for a
                 </FormLabel>
                 <ToggleButtonGroup
                   value={formik.values.lookingfor}
