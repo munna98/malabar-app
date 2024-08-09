@@ -140,7 +140,7 @@ const PartnerPreferenceStep = ({ formik }) => {
             <TextField
               label="To"
               type="number"
-              value={formik.values.partnerAgeRange ? formik.values.partnerAgeRange[1] : 30}
+              value={formik.values.partnerAgeRange ? formik.values.partnerAgeRange[1] : 80}
               onChange={handleAgeToChange}
               inputProps={{ min: 18, max: 80 }}
             />

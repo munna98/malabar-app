@@ -44,7 +44,7 @@ const Profile = () => {
     name: 'Sainaba',
     spirit: 'Tabligh',
     firstMarriage: 'No',
-    age: '30',
+    age: '31',
     education: 'MCom',
     madrasaEducation: '8',
     job: 'Software Developer',

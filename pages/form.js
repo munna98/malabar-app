@@ -121,7 +121,7 @@ const FormComponent = () => {
               additionalInfo2: '',
               additionalInfo3: '',
               partnerDistrict: [],
-              partnerAgeRange: [18, 30]
+              partnerAgeRange: [18, 80]
             }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmitForm}
